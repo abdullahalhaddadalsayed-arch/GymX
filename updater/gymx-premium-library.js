@@ -67,7 +67,7 @@
     main.classList.add("gymx-v05-library");
     const card = [...main.querySelectorAll(".card")].find(x => x.querySelector("h3")?.textContent.includes("Muscle selector"));
     if (card) card.classList.add("gymx-body-card");
-    const old = main.querySelector("svg.body-map:not(.gymx-anatomy-map)");
+    const old = main.querySelector(".gx-anatomy, svg.body-map:not(.gymx-anatomy-map)");
     if (old) {
       const selected = activeMuscle(main);
       const view = main.querySelector('.body-view [data-view].active')?.getAttribute('data-view') || "front";
