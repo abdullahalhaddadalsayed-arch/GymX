@@ -187,6 +187,25 @@ def main():
         if ex.get("id") and ex.get("name_en"):
             rep_by_name[normalized_name(ex["name_en"])].append(ex)
     rep_by_id={str(x.get("id")):x for x in rep_rows if x.get("id")}
+    manual=json.loads((Path(__file__).resolve().parent/"repdb-reviewed-static-guides.json").read_text(encoding="utf-8"))
+    inspected={str(g["repdbId"]):g for g in manual["guides"]}
+    assert len(inspected)==len(manual["guides"])==11
+    assert manual["reviewedOn"]=="2026-11-07"
+    for rid,guide in inspected.items():
+        assert str(guide["sourcePinnedCommit"])=="66c4298af8d99b9dc397dad6699e508fb871d249"
+        assert {guide["startKey"],guide["endKey"]}=={"start","peak"}
+        for pose,meta in guide["exactAssets"].items():
+            imgpath=repo/meta["file"]
+            b=imgpath.read_bytes()
+            gitsha=hashlib.sha1(("blob "+str(len(b))+"\0").encode()+b).hexdigest()
+            assert gitsha==meta["gitBlobSha"],f"Reviewed source image changed: {rid} / {pose}"
+            assert inspect_media(imgpath,"webp")[0],f"Reviewed source image unreadable: {rid}"
+    # These two source images depict the wrong equipment for GymX's named variant.
+    # Reject rather than attaching an incorrect pose or pretending the source title is enough.
+    visual_mismatch={
+        ("ex004","incline-bench-press"),
+        ("ex041","romanian-deadlift"),
+    }
     original=load_exercises(assets/"exercises.js")
     review_js=(assets/"gymx-reviewed-guides.js").read_text(encoding="utf-8")
     review=json.loads(review_js[review_js.index("{"):review_js.rfind("}")+1])
@@ -225,7 +244,8 @@ def main():
         artwork=None
         if len(candidates)==1 and compatibility(ex,candidates[0]):
             rep=candidates[0]
-            artwork=resolve_art(rep,art_root)
+            if (gym_id,str(rep.get("id"))) not in visual_mismatch:
+                artwork=resolve_art(rep,art_root)
         if artwork:
             media={}
             for label,(source_file,size,sha) in artwork.items():
@@ -237,16 +257,21 @@ def main():
                     shutil.copy2(source_file,dest)
                     copied[filename]=sha
                 media[label]="repdb-images/"+filename
+            guide=inspected.get(str(rep["id"]))
             install[gym_id]={
                 "name":title,
                 "sourceId":source,
                 "repdbId":str(rep["id"]),
                 "match":matching_rule,
-                "reviewStatus":"source_labeled_not_individually_reviewed",
+                "reviewStatus":"individually_inspected_static_pair" if guide else "source_labeled_not_individually_reviewed",
+                "visualReview":({k:guide[k] for k in ("startKey","endKey","startCue","endCue","inspectedDate")} if guide else None),
                 "images":media
             }
+        new_reviewed=bool(artwork and rep and str(rep["id"]) in inspected and not is_reviewed)
         if is_reviewed:
             grade="individually_reviewed_photos"
+        elif new_reviewed:
+            grade="individually_inspected_static_pair"
         elif artwork and "start" in artwork and "peak" in artwork:
             grade="publisher_labeled_two_positions"
         elif artwork:
@@ -269,6 +294,8 @@ def main():
             "legacy_images_missing_or_corrupt":broken_local,
             "legacy_distinct_photo_pair":photo_pair,
             "individually_reviewed_legacy_pair":is_reviewed,
+            "newly_individually_reviewed_static_pair":new_reviewed,
+            "repdb_visual_rejected_mismatch":(gym_id,str(rep.get("id"))) in visual_mismatch if rep else False,
             "repdb_exact_or_alias":bool(artwork),
             "repdb_match_type":matching_rule if artwork else "",
             "repdb_source_id":rep["id"] if artwork else "",
@@ -289,6 +316,10 @@ def main():
         "legacy_with_two_distinct_photos":sum(bool(x["legacy_distinct_photo_pair"]) for x in rows),
         "legacy_missing_or_corrupt_image_references":sum(x["legacy_images_missing_or_corrupt"] for x in rows),
         "individually_reviewed_photo_pairs":sum(bool(x["individually_reviewed_legacy_pair"]) for x in rows),
+        "individually_inspected_repdb_source_pairs":len(inspected),
+        "newly_individually_reviewed_static_exercises":sum(bool(x["newly_individually_reviewed_static_pair"]) for x in rows),
+        "total_individually_reviewed_exercises":sum(bool(x["individually_reviewed_legacy_pair"] or x["newly_individually_reviewed_static_pair"]) for x in rows),
+        "repdb_visual_mismatches_rejected":sum(bool(x["repdb_visual_rejected_mismatch"]) for x in rows),
         "repdb_matched_exercises":len(install),
         "repdb_matched_two_positions":sum(x["repdb_image_count"]==2 for x in rows),
         "repdb_matched_single_position":sum(x["repdb_image_count"]==1 for x in rows),
@@ -305,7 +336,7 @@ def main():
     final={"schema":2,
            "source":"RepDB/exercise-dataset; in-app use with visible attribution",
            "mediaPolicy":"Only static WebP images; no GIF or animation",
-           "reviewDisclaimer":"RepDB start/peak photos are source-labeled, NOT individually visually verified by GymX; 36 existing FreeDB guides have independent review",
+           "reviewDisclaimer":"Only listed static photo pairs with matching pinned source hashes are individually reviewed. Other RepDB start/peak photos are publisher-labeled but unverified; 36 existing FreeDB guides retain their separate review.",
            "summary":totals,"exercises":install}
     (assets/"gymx-image-catalog.js").write_text("window.GYMX_IMAGE_CATALOG = "+json.dumps(final,ensure_ascii=False,separators=(",",":"))+";\n",encoding="utf-8")
     (base/"gymx-image-audit.json").write_text(json.dumps({"summary":totals,"rows":rows},ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
@@ -324,6 +355,7 @@ def main():
         "\n\nSources: legacy Free Exercise DB photos and licensed RepDB static 512px artwork. "+
         "RepDB matched poses are *publisher-labeled*, not human-verified. "+
         "Existing 36 reviewed photo pairs remain separate. "+
+        str(len(inspected))+" additional RepDB source pairs were individually inspected; not all match distinct GymX records. "+
         "Kaggle media NOT imported because image licensing was not confirmed.\n",
         encoding="utf-8"
     )
