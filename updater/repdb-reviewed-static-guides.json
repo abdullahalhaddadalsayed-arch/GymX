@@ -3,7 +3,7 @@
   "reviewedOn": "2026-11-07",
   "source": "RepDB free-tier static illustrations, attribution required",
   "reviewType": "Individual human inspection of two images per exercise with descriptive movement cues",
-  "notes": "START/END cues denote one illustrated movement phase; full repetition includes controlled return. Bench press source frames are intentionally reordered to show the upward press.",
+  "notes": "START/END cues denote one illustrated movement phase; full repetition includes controlled return. Bench press source frames are intentionally reordered to show the upward press. Additional 4 reviewed movement pairs added after direct inspection; visually mismatched barbell incline and RDL source artwork is excluded.",
   "guides": [
     {
       "repdbId": "bench-press",
@@ -158,6 +158,94 @@
         }
       },
       "reviewScope": "Two static pose images visually inspected for equipment, exercise identity, and motion phase; not a clinical biomechanics certification."
+    },
+    {
+      "repdbId": "incline-db-press",
+      "sourceId": "RepDB/exercise-dataset",
+      "title": "Incline dumbbell press",
+      "inspectedDate": "2026-11-07",
+      "sourcePinnedCommit": "66c4298af8d99b9dc397dad6699e508fb871d249",
+      "startKey": "peak",
+      "endKey": "start",
+      "startCue": "Dumbbells lowered toward upper chest",
+      "endCue": "Press dumbbells up on the inclined bench",
+      "exactAssets": {
+        "start": {
+          "file": "images/flat/incline-db-press-start.webp",
+          "gitBlobSha": "f3c08dfb426a8145a3ea6a85ac4dd93dc4c8be71"
+        },
+        "peak": {
+          "file": "images/flat/incline-db-press-peak.webp",
+          "gitBlobSha": "97a2a2d6fbf6fdd23b2251d25c0117d1e27e17f9"
+        }
+      },
+      "reviewScope": "Two static pose images individually inspected for identity, equipment, and directional movement phase; not a clinical biomechanics certification."
+    },
+    {
+      "repdbId": "squat",
+      "sourceId": "RepDB/exercise-dataset",
+      "title": "Barbell back squat",
+      "inspectedDate": "2026-11-07",
+      "sourcePinnedCommit": "66c4298af8d99b9dc397dad6699e508fb871d249",
+      "startKey": "peak",
+      "endKey": "start",
+      "startCue": "Hips and knees flexed in the squat",
+      "endCue": "Drive upward to a tall standing position",
+      "exactAssets": {
+        "start": {
+          "file": "images/flat/squat-start.webp",
+          "gitBlobSha": "4f8ab87a56fb29953972dd42ecf076aced46ebcf"
+        },
+        "peak": {
+          "file": "images/flat/squat-peak.webp",
+          "gitBlobSha": "3e7c59940dfb60af29d08e6dc81654c5466f4b21"
+        }
+      },
+      "reviewScope": "Two static pose images individually inspected for identity, equipment, and directional movement phase; not a clinical biomechanics certification."
+    },
+    {
+      "repdbId": "dumbbell-shoulder-press",
+      "sourceId": "RepDB/exercise-dataset",
+      "title": "Dumbbell shoulder press",
+      "inspectedDate": "2026-11-07",
+      "sourcePinnedCommit": "66c4298af8d99b9dc397dad6699e508fb871d249",
+      "startKey": "start",
+      "endKey": "peak",
+      "startCue": "Dumbbells near shoulder height with elbows bent",
+      "endCue": "Press dumbbells overhead with controlled arm extension",
+      "exactAssets": {
+        "start": {
+          "file": "images/flat/dumbbell-shoulder-press-start.webp",
+          "gitBlobSha": "36b8dc189a97dd7d06ce37a2432818da3e90bfc8"
+        },
+        "peak": {
+          "file": "images/flat/dumbbell-shoulder-press-peak.webp",
+          "gitBlobSha": "e769a75749c72fb8e9538266e845d3180bc9a7ec"
+        }
+      },
+      "reviewScope": "Two static pose images individually inspected for identity, equipment, and directional movement phase; not a clinical biomechanics certification."
+    },
+    {
+      "repdbId": "leg-extension",
+      "sourceId": "RepDB/exercise-dataset",
+      "title": "Leg extension",
+      "inspectedDate": "2026-11-07",
+      "sourcePinnedCommit": "66c4298af8d99b9dc397dad6699e508fb871d249",
+      "startKey": "start",
+      "endKey": "peak",
+      "startCue": "Knees bent, shins below the seat",
+      "endCue": "Straighten knees to raise the padded lever",
+      "exactAssets": {
+        "start": {
+          "file": "images/flat/leg-extension-start.webp",
+          "gitBlobSha": "4448b29c3b00e27caa8557e9269363aa8bc61309"
+        },
+        "peak": {
+          "file": "images/flat/leg-extension-peak.webp",
+          "gitBlobSha": "914120a8d1012e66825c1347fd86130c1599623e"
+        }
+      },
+      "reviewScope": "Two static pose images individually inspected for identity, equipment, and directional movement phase; not a clinical biomechanics certification."
     }
   ]
 }
