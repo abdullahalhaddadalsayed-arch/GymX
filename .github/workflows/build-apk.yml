@@ -89,6 +89,9 @@ jobs:
           python3 updater/audit_and_integrate_images.py \
             --android-app android-app \
             --repdb /tmp/exercise-dataset-66c4298af8d99b9dc397dad6699e508fb871d249
+          python3 updater/complete_missing_thumbnails.py \
+            --android-app android-app \
+            --repdb /tmp/exercise-dataset-66c4298af8d99b9dc397dad6699e508fb871d249
           python3 updater/install_image_quality.py --android-app android-app
           node --check android-app/app/src/main/assets/gymx-image-quality.js
           node --check android-app/app/src/main/assets/gymx-image-catalog.js
