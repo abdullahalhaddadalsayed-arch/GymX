@@ -26,6 +26,8 @@ jobs:
       - name: Inject new in-app updater
         run: |
           python3 updater/install_updates_v04.py --android-app android-app
+          python3 updater/enable_library_photos.py --android-app android-app
+          node --check android-app/app/src/main/assets/gymx-library-images.js
           node --check android-app/app/src/main/assets/app.js
           node --check android-app/app/src/main/assets/gymx-updates.js
           node --check android-app/app/src/main/assets/exercises.js
