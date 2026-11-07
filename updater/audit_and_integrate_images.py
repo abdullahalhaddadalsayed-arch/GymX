@@ -47,6 +47,53 @@ ALIASES={
     "barbell curl":"barbell curl"
 }
 
+# Manually checked title-equivalence candidates from the remaining image gaps.
+# These are mapping suggestions only; never auto-classified as independently reviewed.
+# The matching stage also requires target name uniqueness, matching source ID and
+# no contradictory equipment evidence, and validates BOTH image files.
+CURATED_REPDB_IDS={
+    "pec deck fly":"pec-deck",
+    "cable chest fly":"cable-fly",
+    "assisted dip":"assisted-dips",
+    "chest supported row":"chest-supported-machine-row",
+    "barbell bent over row":"barbell-row",
+    "assisted pull up":"assisted-pull-ups",
+    "reverse pec deck":"machine-reverse-fly",
+    "seated shoulder press machine":"machine-shoulder-press",
+    "hip thrust":"hip-thrust",
+    "hip abduction machine":"hip-abduction",
+    "hip adduction machine":"hip-adduction",
+    "conventional deadlift":"deadlift",
+    "biceps curl machine":"machine-bicep-curl",
+    "dumbbell biceps curl":"bicep-curl",
+    "hammer curl":"hammer-curl",
+    "cable biceps curl":"cable-curl",
+    "rope triceps pushdown":"tricep-pushdown",
+    "overhead cable triceps extension":"cable-overhead-tricep-extension",
+    "triceps dip machine":"seated-dip-machine",
+    "triceps kickback":"tricep-kickback",
+    "wrist curl":"dumbbell-wrist-curl",
+    "bicep curl":"barbell-curl",
+    "box jumps":"box-jump",
+    "burpee":"burpees",
+    "donkey kick":"glute-kickback",
+    "halo":"kettlebell-halo",
+    "jump lunges":"plyo-lunge",
+    "lateral band walk":"banded-lateral-walk",
+    "lying leg raises":"lying-leg-raise",
+    "plank row":"renegade-row",
+    "row":"barbell-row",
+    "shoulder press":"ohp",
+    "side arm lateral raise":"lateral-raise",
+    "single leg hip bridge":"single-leg-glute-bridge",
+    "spiderman pushup":"spiderman-push-up",
+    "squat":"squat",
+    "squat jump":"jump-squat",
+    "step back lunge":"barbell-reverse-lunge",
+    "tricep dip":"dips",
+    "tricep overhead press":"dumbbell-tricep-extension"
+}
+
 def family(s):
     text=" ".join(s) if isinstance(s,list) else str(s or "")
     text=text.lower()
@@ -139,6 +186,7 @@ def main():
     for ex in rep_rows:
         if ex.get("id") and ex.get("name_en"):
             rep_by_name[normalized_name(ex["name_en"])].append(ex)
+    rep_by_id={str(x.get("id")):x for x in rep_rows if x.get("id")}
     original=load_exercises(assets/"exercises.js")
     review_js=(assets/"gymx-reviewed-guides.js").read_text(encoding="utf-8")
     review=json.loads(review_js[review_js.index("{"):review_js.rfind("}")+1])
@@ -168,6 +216,11 @@ def main():
         if not candidates and normal in ALIASES:
             candidates=rep_by_name.get(normalized_name(ALIASES[normal]),[])
             matching_rule="curated_alias"
+        if not candidates and normal in CURATED_REPDB_IDS:
+            rep_candidate=rep_by_id.get(CURATED_REPDB_IDS[normal])
+            if rep_candidate:
+                candidates=[rep_candidate]
+                matching_rule="curated_equivalent_movement"
         rep=None
         artwork=None
         if len(candidates)==1 and compatibility(ex,candidates[0]):
@@ -245,6 +298,7 @@ def main():
         "licensed_webp_copied":len(copied),
         "matched_via_exact_title":sum(x["repdb_match_type"]=="exact_title" for x in rows),
         "matched_via_curated_alias":sum(x["repdb_match_type"]=="curated_alias" for x in rows),
+        "matched_via_curated_movement":sum(x["repdb_match_type"]=="curated_equivalent_movement" for x in rows),
         "review_levels":dict(summary)
     }
 
