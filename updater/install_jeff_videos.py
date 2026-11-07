@@ -45,17 +45,5 @@ if "fun openJeffVideo(" not in text:
     text=text.replace(match,method,1)
     java.write_text(text,encoding="utf-8")
 
-for name in ("gymx-jeff-video-links.js","gymx-jeff-video-links.css"):
-    shutil.copy2(src/name, assets/name)
-
-html=index.read_text(encoding="utf-8")
-if "gymx-jeff-video-links.css" not in html:
-    assert "</head>" in html
-    html=html.replace("</head>",'<link rel="stylesheet" href="gymx-jeff-video-links.css"></head>',1)
-if "gymx-jeff-video-links.js" not in html:
-    assert "</body>" in html
-    html=html.replace("</body>",'<script src="gymx-jeff-video-links.js"></script></body>',1)
-index.write_text(html,encoding="utf-8")
-assert "gymx-jeff-video-links.js" in html
 assert "openJeffVideo(url: String)" in java.read_text(encoding="utf-8")
-print("GymX Jeff Nippard video links installed (external YouTube, HTTPS only).")
+print("GymX secure YouTube Android ACTION_VIEW bridge installed.")
