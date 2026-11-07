@@ -1,0 +1,50 @@
+:root{--lime:#b4ff66;--rad:18px}
+.shell{background:linear-gradient(180deg,#0b1116,#090e12 390px)}
+.app-top{padding:19px 20px 13px;background:rgba(10,15,19,.94);border-bottom:1px solid #22312c}
+.body>.eyebrow{font-size:11px;letter-spacing:2.2px;color:#b4ff66}
+.body>.h1{font-size:31px;letter-spacing:-1.2px;margin-top:8px!important}
+.card{border-color:#283633;background:linear-gradient(155deg,#141d22,#11181d)}
+.gx-library-intro{margin:11px 0 17px;display:flex;justify-content:space-between;align-items:center}
+.gx-intro-pill{display:inline-flex;padding:7px 11px;background:#223321;color:#c3fc90;border:1px solid #3c5d37;border-radius:999px;font-size:10px;letter-spacing:.35px;font-weight:800}
+.gx-anatomy{padding:4px 2px 0;position:relative}
+.gx-anatomy-frame{width:100%;max-width:310px;margin:0 auto;min-height:365px;display:flex;justify-content:center;align-items:center;border-radius:20px;overflow:hidden;background:radial-gradient(ellipse at 50% 30%,#26352eaa,transparent 62%),linear-gradient(180deg,#152018,#0f171a);box-shadow:inset 0 0 0 1px #293d32,0 10px 30px #0003}
+.gx-anatomy-frame svg{width:100%!important;max-height:400px!important;height:auto!important;filter:drop-shadow(0 10px 12px rgba(0,0,0,.36));touch-action:manipulation}
+.gx-anatomy-frame [role="button"],.gx-anatomy-frame path,.gx-anatomy-frame polygon{cursor:pointer}
+.gx-figure-foot{font-size:10px;letter-spacing:.8px;color:#9aaea4;text-align:center;margin:13px auto 4px;font-weight:700}
+.gx-status-dot{display:inline-block;width:7px;height:7px;background:#b4ff66;border-radius:99px;margin-right:6px;box-shadow:0 0 0 4px #b4ff6620}
+.body-view{margin:12px 0 8px;gap:8px}
+.body-view .chip{font-size:13px;min-width:82px;padding:10px 15px}
+.body-view .chip.active{background:var(--lime);color:#0b1408}
+#exercise-results{display:grid;gap:9px;margin-top:8px}
+#exercise-results .exercise-row{margin:0;min-height:91px;gap:12px;padding:10px;background:#141d20;border-color:#273832;border-radius:16px;box-shadow:0 4px 15px #0002}
+#exercise-results .exercise-row .ex-icon{width:69px;height:69px;min-width:69px;border-radius:12px;overflow:hidden}
+#exercise-results .exercise-row .ex-icon img{width:100%;height:100%;object-fit:cover}
+#exercise-results .exercise-row .meta strong{font-size:14px;line-height:1.28;max-width:100%;white-space:normal;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2}
+#exercise-results .exercise-row .meta small{font-size:11px;color:#a5b7af;margin-top:5px}
+#exercise-results .exercise-row .action{background:#223826;color:#c4ff81;border:1px solid #3c6037}
+.body .searchbox input{background:#151e21;border-radius:14px;min-height:50px}
+.body #equip-filter{min-height:49px;background:#172120;border-radius:13px}
+.gx-modal-detail{background:#0d1417;border-top:1px solid #455e43}
+.gx-modal-detail .modal-header{background:#0d1417f7!important;border-bottom-color:#2e4338!important}
+.gx-modal-detail .modal-header h2{font-size:24px;letter-spacing:-.8px}
+.gx-modal-detail .poster.freedb-poster{background:#121b1c;border-radius:19px;border:1px solid #2c4133;box-shadow:none;padding:12px}
+.gx-modal-detail .freedb-photos{gap:9px;grid-template-columns:repeat(2,minmax(0,1fr))}
+.gx-modal-detail .gymx-guide-frame{background:linear-gradient(160deg,#18241e,#0e1618);border:1px solid #36543e;border-radius:14px;position:relative}
+.gx-modal-detail .freedb-photos .gymx-guide-frame img{height:210px;object-fit:contain;width:100%;max-width:100%;display:block;border:none}
+.gx-modal-detail .gymx-frame-label{font-size:9px;letter-spacing:1px;font-weight:800;padding:6px 8px;top:8px;left:8px;border-radius:7px;background:#b4ff66;color:#152014}
+.gx-modal-detail .gymx-guide-caption{font-size:11px;color:#91a99c;line-height:1.5;padding:2px}
+.gx-detail-kicker{display:flex;align-items:center;gap:8px;font-size:10px;letter-spacing:1.5px;color:#b4ff66;font-weight:800;margin-bottom:12px;text-transform:uppercase}
+.gx-detail-kicker:before{content:"";width:8px;height:8px;border-radius:50%;background:#b4ff66}
+.gx-detail-summary{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0 18px}
+.gx-detail-stat{background:#18231e;padding:12px;border-radius:12px;border:1px solid #304a35;min-width:0}
+.gx-detail-stat small{display:block;color:#9bb0a4;font-size:10px;letter-spacing:.7px;text-transform:uppercase;margin-bottom:5px}
+.gx-detail-stat strong{font-size:13px;line-height:1.35;display:block;overflow-wrap:anywhere}
+.gx-detail-muscles{background:#121c1a;border:1px solid #304534;padding:13px 14px;border-radius:14px;margin-top:12px}
+.gx-detail-muscles .gx-title{font-size:11px;text-transform:uppercase;color:#b4ff66;font-weight:800;letter-spacing:1.2px}
+.gx-muscle-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.gx-muscle-tag{background:#263b26;color:#e0f8d3;border:1px solid #496947;border-radius:8px;font-size:11px;padding:5px 8px}
+.gx-modal-detail .card.mellow{background:#1b2923;border:1px solid #3a553b;border-radius:14px}
+.gx-modal-detail .section-head h2{font-size:17px}
+.gx-modal-detail .freedb-steps{padding-left:23px;font-size:13px}
+.gx-modal-detail .freedb-steps li{padding-bottom:6px}
+@media(max-width:345px){.gx-anatomy-frame{min-height:300px}.gx-detail-summary{grid-template-columns:1fr}.gx-modal-detail .freedb-photos .gymx-guide-frame img{height:170px}}
