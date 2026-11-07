@@ -37,6 +37,11 @@
   function shownMedia(ex) {
     const item=data[String(ex.id)];
     if(reviewStatus(ex)) return {kind:"reviewed",list:validLegacy(ex).slice(0,2)};
+    if(item?.reviewStatus==="individually_inspected_static_pair" && item?.visualReview &&
+       item?.images?.start && item?.images?.peak){
+      const visual=item.visualReview;
+      return {kind:"static-reviewed",list:[item.images[visual.startKey],item.images[visual.endKey]],repdb:item,visual};
+    }
     if(item?.images?.start && item?.images?.peak)
       return {kind:"publisher",list:[item.images.start,item.images.peak],repdb:item};
     if(item?.images?.main)
@@ -85,10 +90,12 @@
     const card=e("section","gx-audit-guide");
     card.dataset.gxAuditExercise=String(ex.id);
     const header=e("div","gx-audit-head");
-    const kicker=e("strong","",state.kind==="legacy"?"EXERCISE REFERENCE PHOTOS":
+    const kicker=e("strong","",state.kind==="static-reviewed"?"REVIEWED START / END MOVEMENT":
+      state.kind==="legacy"?"EXERCISE REFERENCE PHOTOS":
       state.kind==="missing"?"MOVEMENT GUIDE":
       state.kind==="category"?"TARGET MUSCLE / EQUIPMENT REFERENCE":"STATIC MOVEMENT POSITIONS");
-    const pill=e("span","gx-audit-pill",state.kind==="publisher"?"REPDB · TWO POSITIONS":
+    const pill=e("span","gx-audit-pill",state.kind==="static-reviewed"?"TWO POSES · VISUALLY REVIEWED":
+      state.kind==="publisher"?"REPDB · TWO POSITIONS":
       state.kind==="publisher-single"?"REPDB · ONE POSITION":
       state.kind==="category"?"EQUIPMENT / MUSCLE ART":
       state.kind==="legacy"?"REFERENCE ONLY":"PHOTOS UNAVAILABLE");
@@ -100,17 +107,21 @@
       for(let i=0;i<state.list.length;i++){
         const frame=e("div","gx-audit-frame");
         const badge=e("span","gx-audit-label",
+          state.kind==="static-reviewed"?(i===0?"START":"END"):
           state.kind==="category"?(state.category==="equipment_reference"?"EQUIPMENT":"MUSCLE"):
           state.kind.startsWith("publisher")?
           (state.list.length>1?i===0?"POSITION 1":"POSITION 2":"STATIC POSITION"):
           (state.list.length>1?"REFERENCE "+(i+1):"REFERENCE"));
         frame.append(badge,image(state.list[i],ex.name+" "+badge.textContent.toLowerCase()));
+        if(state.kind==="static-reviewed")frame.append(e("p","gx-audit-checked-cue",i===0?state.visual.startCue:state.visual.endCue));
         grid.append(frame);
       }
       card.append(grid);
     }
     let note;
-    if(state.kind==="publisher")
+    if(state.kind==="static-reviewed")
+      note="These two static exercise poses were individually checked for exercise identity, equipment, and movement phase. Follow the written instructions for full range of motion and controlled return.";
+    else if(state.kind==="publisher")
       note="These two static poses are labeled start and peak by RepDB. GymX has matched the exercise title and equipment, but has not independently verified the movement direction. Follow the written instructions.";
     else if(state.kind==="publisher-single")
       note="A static RepDB exercise illustration is available. This is not a complete START/END demonstration; follow the written instructions.";
@@ -121,7 +132,7 @@
     else
       note="No suitable static movement image is available for this exercise. Use the written instructions. An incorrect picture will not be substituted.";
     card.append(e("p","gx-audit-disclaimer",note));
-    if(state.kind.startsWith("publisher") || state.kind==="category"){
+    if(state.kind.startsWith("publisher") || state.kind==="category" || state.kind==="static-reviewed"){
       const credit=e("a","gx-audit-attribution","Exercise images by RepDB (repdb.co)");
       credit.href="https://repdb.co"; credit.target="_blank";credit.rel="noopener noreferrer";
       card.append(credit);
