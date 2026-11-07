@@ -47,7 +47,8 @@
     if(button) {
       button.classList.toggle("active",reviewedOnly);
       button.setAttribute("aria-pressed",String(reviewedOnly));
-      button.textContent=reviewedOnly ? "✓ Showing reviewed guides" : "Only reviewed guides";
+      const label=reviewedOnly ? "✓ Showing reviewed guides" : "Only reviewed guides";
+      if (button.textContent!==label) button.textContent=label;
     }
     let shown=0,verified=0;
     for(const row of results.querySelectorAll(".exercise-row")) {
@@ -65,9 +66,12 @@
       if(visible) shown++;
     }
     const stat=section.querySelector(".gx-review-count");
-    if(stat) stat.textContent=reviewedOnly
-      ? shown+" reviewed exercises match your current filters"
-      : verified+" reviewed movement guides in these results; other exercises have reference photos and instructions.";
+    if(stat) {
+      const label=reviewedOnly
+        ? shown+" reviewed exercises match your current filters"
+        : verified+" reviewed movement guides in these results; other exercises have reference photos and instructions.";
+      if(stat.textContent!==label) stat.textContent=label;
+    }
   }
 
   function setLabel(frame,text) {
