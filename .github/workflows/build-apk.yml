@@ -77,6 +77,34 @@ jobs:
           node --check android-app/app/src/main/assets/gymx-jeff-nippard-videos.js
           grep -q 'gymx-jeff-nippard-videos.js' android-app/app/src/main/assets/index.html
           grep -q 'gymx-jeff-nippard-videos.css' android-app/app/src/main/assets/index.html
+      - name: Fetch licensed static RepDB exercise illustrations (no animations)
+        run: |
+          curl --fail --location --retry 3 --retry-delay 2 --output /tmp/gymx-repdb-free.zip \
+            "https://codeload.github.com/RepDB/exercise-dataset/zip/66c4298af8d99b9dc397dad6699e508fb871d249"
+          unzip -q /tmp/gymx-repdb-free.zip -d /tmp
+          test -f /tmp/exercise-dataset-66c4298af8d99b9dc397dad6699e508fb871d249/exercises.json
+          test -f /tmp/exercise-dataset-66c4298af8d99b9dc397dad6699e508fb871d249/LICENSE-DATA.md
+      - name: Audit every GymX image and add licensed static artwork for exact exercise matches
+        run: |
+          python3 updater/audit_and_integrate_images.py \
+            --android-app android-app \
+            --repdb /tmp/exercise-dataset-66c4298af8d99b9dc397dad6699e508fb871d249
+          python3 updater/install_image_quality.py --android-app android-app
+          node --check android-app/app/src/main/assets/gymx-image-quality.js
+          node --check android-app/app/src/main/assets/gymx-image-catalog.js
+          test -s android-app/gymx-image-audit.csv
+          test -s android-app/gymx-image-audit.json
+          test -s android-app/gymx-image-summary.md
+          grep -q 'gymx-image-quality.js' android-app/app/src/main/assets/index.html
+      - name: Save full image coverage QA evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: GymX-all-exercise-image-coverage
+          path: |
+            android-app/gymx-image-audit.csv
+            android-app/gymx-image-audit.json
+            android-app/gymx-image-summary.md
+          if-no-files-found: error
       - name: Save new visual-quality QA evidence
         uses: actions/upload-artifact@v4
         with:
@@ -149,7 +177,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           cp android-app/app/build/outputs/apk/release/app-release.apk GymX.apk
-          gh release create "v${GYMX_VERSION_NAME}" "GymX.apk" --repo "$GITHUB_REPOSITORY" --title "GymX v${GYMX_VERSION_NAME}" --notes "New signed GymX update. Open GymX Settings > Check for updates."
+          gh release create "v${GYMX_VERSION_NAME}" "GymX.apk" "android-app/gymx-image-summary.md#GymX_Image_Coverage_Summary.md" --repo "$GITHUB_REPOSITORY" --title "GymX v${GYMX_VERSION_NAME}" --notes-file android-app/gymx-image-summary.md
       - name: Delete temporary signing key
         if: always()
         run: rm -f android-app/app/gymx-release.jks
