@@ -95,7 +95,7 @@
 
   function choose(ex) {
     const name=String(ex.name||"Exercise").trim();
-    const rawGroup=String(ex.muscle||ex.primaryMuscles?.[0]||"").toLowerCase();
+    const rawGroup=[ex.muscle,...(ex.primaryMuscles||[])].filter(Boolean).join(" ").toLowerCase();
     const group = /biceps/.test(rawGroup)?"biceps":/triceps/.test(rawGroup)?"triceps":
       /shoulder|deltoid/.test(rawGroup)?"shoulder":
       /quadriceps|quad/.test(rawGroup)?"quads":/chest|pectoral/.test(rawGroup)?"chest":
