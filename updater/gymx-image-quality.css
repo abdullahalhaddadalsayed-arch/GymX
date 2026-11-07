@@ -133,3 +133,29 @@
   width:75%;
   object-fit:contain;
 }
+
+/* Individually inspected static movement photographs: clear START / END cues. */
+.gx-audit-checked-cue{
+  width:100%;
+  min-height:51px;
+  margin:0!important;
+  padding:9px 9px 10px;
+  background:#1d2c29;
+  border-top:1px solid #456546;
+  color:#e1f2d9!important;
+  font-size:11px!important;
+  line-height:1.45!important;
+}
+.gx-audit-guide .gx-audit-frame:has(.gx-audit-checked-cue){
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  min-height:240px;
+}
+.gx-audit-guide .gx-audit-frame:has(.gx-audit-checked-cue) img{
+  flex:1 1 auto;
+  object-fit:contain;
+}
+.gx-audit-guide .gx-audit-frame:has(.gx-audit-checked-cue) .gx-audit-label{
+  position:absolute;
+}
