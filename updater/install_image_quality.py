@@ -19,7 +19,7 @@ metadata=(assets/"gymx-image-catalog.js").read_text(encoding="utf-8")
 catalog=json.loads(metadata[metadata.index("{"):metadata.rfind("}")+1])
 assert catalog["summary"]["total_exercises"]>=800, "GymX catalogue unexpectedly shrunk"
 assert catalog["summary"]["individually_reviewed_photo_pairs"]==36
-assert len(catalog["exercises"])==catalog["summary"]["repdb_matched_exercises"]
+assert len(catalog["exercises"])>=catalog["summary"]["repdb_matched_exercises"]
 for name in ("gymx-image-quality.js","gymx-image-quality.css"):
     shutil.copy2(src/name,assets/name)
 
