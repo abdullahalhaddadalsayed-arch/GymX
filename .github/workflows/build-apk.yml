@@ -67,6 +67,12 @@ jobs:
           node --check android-app/app/src/main/assets/gymx-visual-quality.js
           test $(stat -c %s android-app/app/src/main/assets/gx-human-front.webp) -gt 50000
           test $(stat -c %s android-app/app/src/main/assets/gx-human-back.webp) -gt 50000
+      - name: Add Jeff Nippard YouTube video links to every exercise
+        run: |
+          python3 updater/install_jeff_videos.py --android-app android-app
+          node --check android-app/app/src/main/assets/gymx-jeff-video-links.js
+          grep -q 'gymx-jeff-video-links.js' android-app/app/src/main/assets/index.html
+          grep -q 'openJeffVideo(url: String)' android-app/app/src/main/java/com/gymx/app/MainActivity.kt
       - name: Save new visual-quality QA evidence
         uses: actions/upload-artifact@v4
         with:
