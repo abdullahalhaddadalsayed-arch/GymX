@@ -4,7 +4,7 @@
 Existing workout history, images, offline functionality, exercise IDs, and local storage
 are unchanged. The video opens externally and needs internet.
 """
-import argparse, shutil
+import argparse, shutil, subprocess, sys
 from pathlib import Path
 
 p=argparse.ArgumentParser()
@@ -13,6 +13,8 @@ args=p.parse_args()
 assets=Path(args.android_app)/"app/src/main/assets"
 index=assets/"index.html"
 src=Path(__file__).resolve().parent
+subprocess.run([sys.executable, str(src/"install_jeff_videos.py"), "--android-app", args.android_app], check=True)
+assert "openJeffVideo(url: String)" in (Path(args.android_app)/"app/src/main/java/com/gymx/app/MainActivity.kt").read_text(encoding="utf-8")
 assert index.is_file() and (assets/"exercises.js").is_file()
 assert "gymx-visual-quality.js" in index.read_text(encoding="utf-8"), "Core visual assets must be installed before YouTube links"
 for name in ("gymx-jeff-nippard-videos.js","gymx-jeff-nippard-videos.css"):
