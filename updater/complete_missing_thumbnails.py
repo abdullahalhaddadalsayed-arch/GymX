@@ -124,8 +124,10 @@ with (base/"gymx-image-audit.csv").open("w",encoding="utf-8",newline="") as f:
     "\n\n**Quality disclosure:** Only exercise-specific photos and exact-match RepDB art "+
     "are movement references. "+str(fallbacks)+" equipment/muscle thumbnails are "+
     "clearly labeled generic references, *not* START/END exercise guides. "+
-    "The original 36 human-reviewed photo guides remain. New RepDB two-position "+
-    "images are publisher-labeled and not individually visually verified. "+
+    "The original 36 human-reviewed photo guides remain, with "+
+    str(totals.get("newly_individually_reviewed_static_exercises",0))+
+    " additional GymX exercises individually reviewed using static RepDB photo pairs. "+
+    "Other RepDB two-position images are publisher-labeled but not independently reviewed. "+
     "No GIFs or animations. The Kaggle dataset was not imported because licensing "+
     "could not be confirmed.\n",
     encoding="utf-8"
