@@ -53,6 +53,26 @@ jobs:
           node --check android-app/app/src/main/assets/gymx-reviewed-guides.js
           grep -q 'gymx-reviewed-guide-ui.js' android-app/app/src/main/assets/index.html
           grep -q 'gymx-reviewed-guide-ui.css' android-app/app/src/main/assets/index.html
+      - name: Install high-resolution offline male body visuals and honest guide fallback
+        run: |
+          mkdir -p /tmp/gymx-hires-body
+          for side in front back; do
+            curl --fail --location --retry 3 --retry-delay 2 --output "/tmp/gymx-hires-body/male-${side}.webp" \
+              "https://raw.githubusercontent.com/Jsplice/MuscleMap/170cfacda79376dd59ac0cf2f7dfab8ff9f4443a/packages/assets/bodies/male-${side}.webp"
+          done
+          curl --fail --location --retry 3 --retry-delay 2 \
+            --output /tmp/gymx-hires-body/LICENSE \
+            "https://raw.githubusercontent.com/Jsplice/MuscleMap/170cfacda79376dd59ac0cf2f7dfab8ff9f4443a/LICENSE"
+          python3 updater/install_visual_quality.py --android-app android-app --image-dir /tmp/gymx-hires-body
+          node --check android-app/app/src/main/assets/gymx-visual-quality.js
+          test $(stat -c %s android-app/app/src/main/assets/gx-human-front.webp) -gt 50000
+          test $(stat -c %s android-app/app/src/main/assets/gx-human-back.webp) -gt 50000
+      - name: Save new visual-quality QA evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: GymX-visual-quality-QA
+          path: android-app/gymx-visual-quality-QA.json
+          if-no-files-found: error
       - name: Save reviewed movement QA evidence
         uses: actions/upload-artifact@v4
         with:
