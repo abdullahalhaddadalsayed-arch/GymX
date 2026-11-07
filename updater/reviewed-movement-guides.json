@@ -1,0 +1,333 @@
+{
+  "schema": 1,
+  "reviewedOn": "2026-11-07",
+  "reviewType": "Human inspection of both photos, corroborated against exercise descriptions; curated movement phases",
+  "source": "yuhonas/free-exercise-db",
+  "notes": "Each approved pair is individually inspected. Start/end describe one illustrated motion phase; full repetition includes return. Unreviewed paired images are references only, not certified start/end.",
+  "guides": [
+    {
+      "sourceId": "Barbell_Curl",
+      "startIndex": 0,
+      "endIndex": 1,
+      "startCue": "Arms extended, bar at thighs",
+      "endCue": "Curl bar toward chest",
+      "motion": "Curl upward",
+      "reviewed": true
+    },
+    {
+      "sourceId": "Leg_Press",
+      "startIndex": 0,
+      "endIndex": 1,
+      "startCue": "Legs extended without knee lock",
+      "endCue": "Bend knees to a controlled depth",
+      "motion": "Lower the platform",
+      "reviewed": true
+    },
+    {
+      "sourceId": "Barbell_Bench_Press_-_Medium_Grip",
+      "startIndex": 0,
+      "endIndex": 1,
+      "startCue": "Bar above chest, arms extended",
+      "endCue": "Lower bar toward mid-chest",
+      "motion": "Lower under control",
+      "reviewed": true
+    },
+    {
+      "sourceId": "Dumbbell_Bench_Press",
+      "startIndex": 0,
+      "endIndex": 1,
+      "startCue": "Dumbbells beside chest, elbows bent",
+      "endCue": "Press dumbbells above chest",
+      "motion": "Press upward",
+      "reviewed": true
+    },
+    {
+      "sourceId": "Side_Lateral_Raise",
+      "startIndex": 0,
+      "endIndex": 1,
+      "startCue": "Dumbbells beside thighs",
+      "endCue": "Raise arms sideways toward shoulder level",
+      "motion": "Raise outward",
+      "reviewed": true
+    },
+    {
+      "sourceId": "Dumbbell_Shoulder_Press",
+      "startIndex": 0,
+      "endIndex": 1,
+      "startCue": "Dumbbells near shoulder height",
+      "endCue": "Press overhead without excessive arch",
+      "motion": "Press upward",
+      "reviewed": true
+    },
+    {
+      "sourceId": "Leg_Extensions",
+      "startIndex": 0,
+      "endIndex": 1,
+      "startCue": "Knees bent, pads across shins",
+      "endCue": "Extend knees with control",
+      "motion": "Extend lower legs",
+      "reviewed": true
+    },
+    {
+      "sourceId": "Lying_Leg_Curls",
+      "startIndex": 0,
+      "endIndex": 1,
+      "startCue": "Legs extended on the machine",
+      "endCue": "Flex knees, curling pads upward",
+      "motion": "Curl lower legs",
+      "reviewed": true
+    },
+    {
+      "sourceId": "Barbell_Full_Squat",
+      "startIndex": 0,
+      "endIndex": 1,
+      "startCue": "Stand tall with bar supported",
+      "endCue": "Bend hips and knees into a squat",
+      "motion": "Squat downward",
+      "reviewed": true
+    },
+    {
+      "sourceId": "Smith_Machine_Squat",
+      "startIndex": 1,
+      "endIndex": 0,
+      "startCue": "Stand tall under supported bar",
+      "endCue": "Lower hips into the squat",
+      "motion": "Squat downward",
+      "reviewed": true
+    },
+    {
+      "sourceId": "Close-Grip_Front_Lat_Pulldown",
+      "startIndex": 0,
+      "endIndex": 1,
+      "startCue": "Arms extended, bar overhead",
+      "endCue": "Pull bar toward upper chest",
+      "motion": "Pull down",
+      "reviewed": true
+    },
+    {
+      "sourceId": "Seated_Cable_Rows",
+      "startIndex": 0,
+      "endIndex": 1,
+      "startCue": "Arms extended, neutral torso",
+      "endCue": "Pull handles toward abdomen",
+      "motion": "Row backward",
+      "reviewed": true
+    },
+    {
+      "sourceId": "One-Arm_Dumbbell_Row",
+      "startIndex": 0,
+      "endIndex": 1,
+      "startCue": "Arm hangs beneath shoulder",
+      "endCue": "Drive elbow back beside torso",
+      "motion": "Row toward hip",
+      "reviewed": true
+    },
+    {
+      "sourceId": "Pullups",
+      "startIndex": 0,
+      "endIndex": 1,
+      "startCue": "Hang from bar with arms extended",
+      "endCue": "Pull torso toward the bar",
+      "motion": "Pull upward",
+      "reviewed": true
+    },
+    {
+      "sourceId": "Bent_Over_Barbell_Row",
+      "startIndex": 0,
+      "endIndex": 1,
+      "startCue": "Bar hangs below torso",
+      "endCue": "Draw bar toward lower ribs",
+      "motion": "Row upward",
+      "reviewed": true
+    },
+    {
+      "sourceId": "Butterfly",
+      "startIndex": 1,
+      "endIndex": 0,
+      "startCue": "Handles wide, chest open",
+      "endCue": "Bring handles together in front",
+      "motion": "Close arms together",
+      "reviewed": true
+    },
+    {
+      "sourceId": "Triceps_Pushdown",
+      "startIndex": 0,
+      "endIndex": 1,
+      "startCue": "Elbows bent, upper arms still",
+      "endCue": "Extend elbows, pushing handle down",
+      "motion": "Push down",
+      "reviewed": true
+    },
+    {
+      "sourceId": "Triceps_Pushdown_-_Rope_Attachment",
+      "startIndex": 0,
+      "endIndex": 1,
+      "startCue": "Rope near upper abdomen",
+      "endCue": "Extend elbows and spread rope ends",
+      "motion": "Push rope down",
+      "reviewed": true
+    },
+    {
+      "sourceId": "Hammer_Curls",
+      "startIndex": 0,
+      "endIndex": 1,
+      "startCue": "Arms down, neutral grip",
+      "endCue": "Flex elbows, weights toward shoulders",
+      "motion": "Curl upward",
+      "reviewed": true
+    },
+    {
+      "sourceId": "Pushups",
+      "startIndex": 0,
+      "endIndex": 1,
+      "startCue": "Straight-arm plank position",
+      "endCue": "Bend elbows, lower chest toward floor",
+      "motion": "Lower chest",
+      "reviewed": true
+    },
+    {
+      "sourceId": "Crunches",
+      "startIndex": 0,
+      "endIndex": 1,
+      "startCue": "Back on mat, shoulders resting",
+      "endCue": "Curl upper torso off mat",
+      "motion": "Curl torso upward",
+      "reviewed": true
+    },
+    {
+      "sourceId": "Dumbbell_Flyes",
+      "startIndex": 0,
+      "endIndex": 1,
+      "startCue": "Arms above chest with soft elbows",
+      "endCue": "Open arms outward under control",
+      "motion": "Open arms outward",
+      "reviewed": true
+    },
+    {
+      "sourceId": "Incline_Dumbbell_Press",
+      "startIndex": 0,
+      "endIndex": 1,
+      "startCue": "Dumbbells beside upper chest",
+      "endCue": "Press weights above shoulders",
+      "motion": "Press upward",
+      "reviewed": true
+    },
+    {
+      "sourceId": "Front_Dumbbell_Raise",
+      "startIndex": 0,
+      "endIndex": 1,
+      "startCue": "Dumbbells in front of thighs",
+      "endCue": "Raise one arm in front to shoulder height",
+      "motion": "Raise forward",
+      "reviewed": true
+    },
+    {
+      "sourceId": "Cable_Crunch",
+      "startIndex": 0,
+      "endIndex": 1,
+      "startCue": "Kneel with torso relatively upright",
+      "endCue": "Curl upper torso toward knees",
+      "motion": "Crunch downward",
+      "reviewed": true
+    },
+    {
+      "sourceId": "Romanian_Deadlift",
+      "startIndex": 1,
+      "endIndex": 0,
+      "startCue": "Stand tall with bar by thighs",
+      "endCue": "Hinge hips back, bar near legs",
+      "motion": "Hinge backward",
+      "reviewed": true
+    },
+    {
+      "sourceId": "Seated_Dumbbell_Curl",
+      "startIndex": 0,
+      "endIndex": 1,
+      "startCue": "Dumbbells beside torso",
+      "endCue": "Flex elbows, bring weights upward",
+      "motion": "Curl upward",
+      "reviewed": true
+    },
+    {
+      "sourceId": "Dips_-_Triceps_Version",
+      "startIndex": 1,
+      "endIndex": 0,
+      "startCue": "Support body on extended arms",
+      "endCue": "Bend elbows to lower body",
+      "motion": "Lower body",
+      "reviewed": true
+    },
+    {
+      "sourceId": "Upright_Barbell_Row",
+      "startIndex": 1,
+      "endIndex": 0,
+      "startCue": "Bar rests near thighs",
+      "endCue": "Pull bar upward with elbows leading",
+      "motion": "Pull upward",
+      "reviewed": true
+    },
+    {
+      "sourceId": "Standing_Military_Press",
+      "startIndex": 0,
+      "endIndex": 1,
+      "startCue": "Bar at upper chest",
+      "endCue": "Press bar overhead",
+      "motion": "Press upward",
+      "reviewed": true
+    },
+    {
+      "sourceId": "Hack_Squat",
+      "startIndex": 0,
+      "endIndex": 1,
+      "startCue": "Legs extended on machine",
+      "endCue": "Bend hips and knees to lower carriage",
+      "motion": "Squat downward",
+      "reviewed": true
+    },
+    {
+      "sourceId": "Cable_Hammer_Curls_-_Rope_Attachment",
+      "startIndex": 0,
+      "endIndex": 1,
+      "startCue": "Rope down, palms facing in",
+      "endCue": "Curl rope toward upper chest",
+      "motion": "Curl upward",
+      "reviewed": true
+    },
+    {
+      "sourceId": "Flat_Bench_Lying_Leg_Raise",
+      "startIndex": 0,
+      "endIndex": 1,
+      "startCue": "Legs extended near bench level",
+      "endCue": "Raise legs toward vertical",
+      "motion": "Raise legs",
+      "reviewed": true
+    },
+    {
+      "sourceId": "Reverse_Flyes",
+      "startIndex": 0,
+      "endIndex": 1,
+      "startCue": "Arms hanging beneath chest",
+      "endCue": "Open arms out to the sides",
+      "motion": "Lift outward",
+      "reviewed": true
+    },
+    {
+      "sourceId": "Standing_Dumbbell_Triceps_Extension",
+      "startIndex": 0,
+      "endIndex": 1,
+      "startCue": "Arms extended overhead",
+      "endCue": "Bend elbows, lower weight behind head",
+      "motion": "Lower behind head",
+      "reviewed": true
+    },
+    {
+      "sourceId": "Weighted_Bench_Dip",
+      "startIndex": 0,
+      "endIndex": 1,
+      "startCue": "Arms extended, hips elevated",
+      "endCue": "Bend elbows to lower hips",
+      "motion": "Lower body",
+      "reviewed": true
+    }
+  ]
+}
