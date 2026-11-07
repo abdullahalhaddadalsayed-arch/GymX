@@ -41,6 +41,8 @@
       return {kind:"publisher",list:[item.images.start,item.images.peak],repdb:item};
     if(item?.images?.main)
       return {kind:"publisher-single",list:[item.images.main],repdb:item};
+    if(item?.thumbnail && /_reference$/.test(item.kind||""))
+      return {kind:"category",list:[item.thumbnail],category:item.kind};
     if(validLegacy(ex).length)
       return {kind:"legacy",list:validLegacy(ex).slice(0,2)};
     return {kind:"missing",list:[]};
@@ -66,6 +68,7 @@
       if(was===first)continue;
       row.dataset.gxStaticThumbnail=first;
       icon.classList.remove("gx-audit-no-photo");
+      icon.classList.toggle("gx-audit-category-icon",state.kind==="category");
       let existing=icon.querySelector("img.gx-audit-thumbnail");
       if(existing)existing.remove();
       if(state.kind==="reviewed")continue; // preserve photo quality as installed.
@@ -83,9 +86,11 @@
     card.dataset.gxAuditExercise=String(ex.id);
     const header=e("div","gx-audit-head");
     const kicker=e("strong","",state.kind==="legacy"?"EXERCISE REFERENCE PHOTOS":
-      state.kind==="missing"?"MOVEMENT GUIDE":"STATIC MOVEMENT POSITIONS");
+      state.kind==="missing"?"MOVEMENT GUIDE":
+      state.kind==="category"?"TARGET MUSCLE / EQUIPMENT REFERENCE":"STATIC MOVEMENT POSITIONS");
     const pill=e("span","gx-audit-pill",state.kind==="publisher"?"REPDB · TWO POSITIONS":
       state.kind==="publisher-single"?"REPDB · ONE POSITION":
+      state.kind==="category"?"EQUIPMENT / MUSCLE ART":
       state.kind==="legacy"?"REFERENCE ONLY":"PHOTOS UNAVAILABLE");
     header.append(kicker,pill);
     card.append(header);
@@ -95,6 +100,7 @@
       for(let i=0;i<state.list.length;i++){
         const frame=e("div","gx-audit-frame");
         const badge=e("span","gx-audit-label",
+          state.kind==="category"?(state.category==="equipment_reference"?"EQUIPMENT":"MUSCLE"):
           state.kind.startsWith("publisher")?
           (state.list.length>1?i===0?"POSITION 1":"POSITION 2":"STATIC POSITION"):
           (state.list.length>1?"REFERENCE "+(i+1):"REFERENCE"));
@@ -110,10 +116,12 @@
       note="A static RepDB exercise illustration is available. This is not a complete START/END demonstration; follow the written instructions.";
     else if(state.kind==="legacy")
       note="These are existing reference photos; their movement order has not been independently checked. Do not treat them as a verified START/END sequence.";
+    else if(state.kind==="category")
+      note="This licensed visual shows the equipment or muscle group only. It is not an exercise demonstration. No verified movement photos are available yet; follow the written instructions.";
     else
       note="No suitable static movement image is available for this exercise. Use the written instructions. An incorrect picture will not be substituted.";
     card.append(e("p","gx-audit-disclaimer",note));
-    if(state.kind.startsWith("publisher")){
+    if(state.kind.startsWith("publisher") || state.kind==="category"){
       const credit=e("a","gx-audit-attribution","Exercise images by RepDB (repdb.co)");
       credit.href="https://repdb.co"; credit.target="_blank";credit.rel="noopener noreferrer";
       card.append(credit);
