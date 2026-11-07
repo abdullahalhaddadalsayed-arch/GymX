@@ -88,7 +88,8 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "v${GYMX_VERSION_NAME}" "android-app/app/build/outputs/apk/release/app-release.apk#GymX.apk" --repo "$GITHUB_REPOSITORY" --title "GymX v${GYMX_VERSION_NAME}" --notes "New signed GymX update. Open GymX Settings > Check for updates."
+          cp android-app/app/build/outputs/apk/release/app-release.apk GymX.apk
+          gh release create "v${GYMX_VERSION_NAME}" "GymX.apk" --repo "$GITHUB_REPOSITORY" --title "GymX v${GYMX_VERSION_NAME}" --notes "New signed GymX update. Open GymX Settings > Check for updates."
       - name: Delete temporary signing key
         if: always()
         run: rm -f android-app/app/gymx-release.jks
