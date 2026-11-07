@@ -1,0 +1,18 @@
+/* External training reference — official Jeff Nippard YouTube channel. */
+.gx-jeff-video{
+  margin:14px 0 17px;
+  padding:15px;
+  border-radius:17px;
+  background:linear-gradient(135deg,#1a2424,#122022);
+  border:1px solid #3b5943;
+  box-shadow:0 5px 20px #0002;
+}
+.gx-jeff-heading{display:flex;align-items:center;gap:8px;color:#d9f2d2;font-size:10px;letter-spacing:.09em;margin-bottom:12px;font-weight:800}
+.gx-jeff-dot{display:block;flex:0 0 8px;width:8px;height:8px;background:#bdff7d;box-shadow:0 0 0 4px #b9fb7516;border-radius:50%}
+.gx-jeff-button,.gx-jeff-button:visited{display:flex;align-items:center;justify-content:space-between;gap:10px;text-decoration:none;color:#13200e!important;background:#bdff76;font-size:13px;font-weight:800;padding:13px 15px;min-height:46px;border-radius:12px;line-height:1.35}
+.gx-jeff-button:focus-visible{outline:2px solid #fff;outline-offset:3px}
+.gx-jeff-arrow{font-size:19px;font-weight:900;line-height:1}
+.gx-jeff-detail{font-size:11px;color:#d0e6ce;line-height:1.45;margin:11px 0 4px}
+.gx-jeff-disclaimer{color:#90a9a0;font-size:10px;line-height:1.55;margin:5px 0}
+.gx-jeff-secondary,.gx-jeff-secondary:visited{display:inline-block;color:#c1fc83!important;font-size:11px;margin-top:9px;text-decoration:underline;text-underline-offset:3px}
+@media(max-width:340px){.gx-jeff-video{padding:12px}.gx-jeff-button{font-size:12px;padding:11px}}
