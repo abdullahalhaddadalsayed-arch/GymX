@@ -31,10 +31,24 @@ jobs:
           node --check android-app/app/src/main/assets/app.js
           node --check android-app/app/src/main/assets/gymx-updates.js
           node --check android-app/app/src/main/assets/exercises.js
+      - name: Download pinned offline anatomical male body map
+        run: |
+          mkdir -p /tmp/gymx-anatomy-pkg
+          npm pack @emmorts/body-muscles@2.1.1 --pack-destination /tmp/gymx-anatomy-pkg --silent
+          tar -xzf /tmp/gymx-anatomy-pkg/emmorts-body-muscles-2.1.1.tgz -C /tmp/gymx-anatomy-pkg
+          test -f /tmp/gymx-anatomy-pkg/package/dist/umd/body-muscles.umd.min.js
+      - name: Integrate GymX premium anatomical UI
+        run: |
+          python3 updater/enable_v05_design.py --android-app android-app --anatomy-package /tmp/gymx-anatomy-pkg/package
+          node --check android-app/app/src/main/assets/gymx-anatomy.js
+          node --check android-app/app/src/main/assets/gymx-premium-design.js
+          grep -q 'gymx-anatomy.js' android-app/app/src/main/assets/index.html
+          grep -q 'gymx-library-images.js' android-app/app/src/main/assets/index.html
+          grep -q 'gymx-updates.js' android-app/app/src/main/assets/index.html
       - name: Version every build
         run: |
-          echo "GYMX_VERSION_CODE=$((400000 + GITHUB_RUN_NUMBER))" >> "$GITHUB_ENV"
-          echo "GYMX_VERSION_NAME=0.4.${GITHUB_RUN_NUMBER}" >> "$GITHUB_ENV"
+          echo "GYMX_VERSION_CODE=$((500000 + GITHUB_RUN_NUMBER))" >> "$GITHUB_ENV"
+          echo "GYMX_VERSION_NAME=0.5.${GITHUB_RUN_NUMBER}" >> "$GITHUB_ENV"
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
