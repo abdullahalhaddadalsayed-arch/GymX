@@ -96,3 +96,40 @@
   .gx-audit-frame img{max-height:200px}
   .gx-audit-label{font-size:9px;padding:4px 5px}
 }
+
+/* Licensed equipment/muscle references in place of empty thumbnails. */
+.exercise-row .ex-icon.gx-audit-category-icon{
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid #405449;
+  background:radial-gradient(circle at 50% 30%,#274033,#101f20 80%);
+}
+.exercise-row .ex-icon.gx-audit-category-icon img.gx-audit-thumbnail{
+  width:90%!important;
+  height:90%!important;
+  object-fit:contain!important;
+  padding:4px;
+}
+.gx-audit-category-icon::after{
+  content:"REFERENCE";
+  position:absolute;
+  bottom:1px;
+  right:1px;
+  border-radius:3px;
+  padding:2px 3px;
+  color:#b4d39e;
+  background:rgba(13,26,23,.9);
+  font-size:6px;
+  font-weight:750;
+  letter-spacing:.02em;
+}
+.gx-audit-guide .gx-audit-grid.single .gx-audit-frame{
+  min-height:155px;
+}
+.gx-audit-guide .gx-audit-grid.single .gx-audit-frame img{
+  max-height:245px;
+  width:75%;
+  object-fit:contain;
+}
