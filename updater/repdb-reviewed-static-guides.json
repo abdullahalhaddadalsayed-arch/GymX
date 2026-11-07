@@ -1,0 +1,163 @@
+{
+  "version": 1,
+  "reviewedOn": "2026-11-07",
+  "source": "RepDB free-tier static illustrations, attribution required",
+  "reviewType": "Individual human inspection of two images per exercise with descriptive movement cues",
+  "notes": "START/END cues denote one illustrated movement phase; full repetition includes controlled return. Bench press source frames are intentionally reordered to show the upward press.",
+  "guides": [
+    {
+      "repdbId": "bench-press",
+      "sourceId": "RepDB/exercise-dataset",
+      "title": "Barbell bench press",
+      "inspectedDate": "2026-11-07",
+      "sourcePinnedCommit": "66c4298af8d99b9dc397dad6699e508fb871d249",
+      "startKey": "peak",
+      "endKey": "start",
+      "startCue": "Bar lowered toward mid-chest with elbows bent",
+      "endCue": "Press the bar up until arms are extended under control",
+      "exactAssets": {
+        "start": {
+          "file": "images/flat/bench-press-start.webp",
+          "gitBlobSha": "c2503d3e7e95ed96b764cd8e7faf7144263114dd"
+        },
+        "peak": {
+          "file": "images/flat/bench-press-peak.webp",
+          "gitBlobSha": "08d8fdbcb4efb57c13d34a95188ebf5eead427dc"
+        }
+      },
+      "reviewScope": "Two static pose images visually inspected for equipment, exercise identity, and motion phase; not a clinical biomechanics certification."
+    },
+    {
+      "repdbId": "db-bench-press",
+      "sourceId": "RepDB/exercise-dataset",
+      "title": "Dumbbell bench press",
+      "inspectedDate": "2026-11-07",
+      "sourcePinnedCommit": "66c4298af8d99b9dc397dad6699e508fb871d249",
+      "startKey": "start",
+      "endKey": "peak",
+      "startCue": "Dumbbells beside the chest with elbows bent",
+      "endCue": "Press dumbbells up until arms are extended",
+      "exactAssets": {
+        "start": {
+          "file": "images/flat/db-bench-press-start.webp",
+          "gitBlobSha": "a16a0b17db4ddab650ef52c6031bba50e79238fb"
+        },
+        "peak": {
+          "file": "images/flat/db-bench-press-peak.webp",
+          "gitBlobSha": "4b14b183af3e3ef1e1618309ab1ce629e10e7a51"
+        }
+      },
+      "reviewScope": "Two static pose images visually inspected for equipment, exercise identity, and motion phase; not a clinical biomechanics certification."
+    },
+    {
+      "repdbId": "barbell-curl",
+      "sourceId": "RepDB/exercise-dataset",
+      "title": "Barbell curl",
+      "inspectedDate": "2026-11-07",
+      "sourcePinnedCommit": "66c4298af8d99b9dc397dad6699e508fb871d249",
+      "startKey": "start",
+      "endKey": "peak",
+      "startCue": "Arms extended with bar near thighs",
+      "endCue": "Flex elbows to bring bar toward upper chest",
+      "exactAssets": {
+        "start": {
+          "file": "images/flat/barbell-curl-start.webp",
+          "gitBlobSha": "28c4ba43bbaa67a3d39bedcffa1783b2cd6ca3f5"
+        },
+        "peak": {
+          "file": "images/flat/barbell-curl-peak.webp",
+          "gitBlobSha": "e1db4db2d976c4a886ee167b17b03e71174a3bf3"
+        }
+      },
+      "reviewScope": "Two static pose images visually inspected for equipment, exercise identity, and motion phase; not a clinical biomechanics certification."
+    },
+    {
+      "repdbId": "lat-pulldown",
+      "sourceId": "RepDB/exercise-dataset",
+      "title": "Lat pulldown",
+      "inspectedDate": "2026-11-07",
+      "sourcePinnedCommit": "66c4298af8d99b9dc397dad6699e508fb871d249",
+      "startKey": "start",
+      "endKey": "peak",
+      "startCue": "Seated with arms overhead holding the bar",
+      "endCue": "Pull bar down toward upper chest without swinging",
+      "exactAssets": {
+        "start": {
+          "file": "images/flat/lat-pulldown-start.webp",
+          "gitBlobSha": "338fd608dd796b216a4ef378f8708e4d2a6d3eac"
+        },
+        "peak": {
+          "file": "images/flat/lat-pulldown-peak.webp",
+          "gitBlobSha": "435242d4396b8ae90db8835710342af35480be8c"
+        }
+      },
+      "reviewScope": "Two static pose images visually inspected for equipment, exercise identity, and motion phase; not a clinical biomechanics certification."
+    },
+    {
+      "repdbId": "leg-press",
+      "sourceId": "RepDB/exercise-dataset",
+      "title": "Leg press",
+      "inspectedDate": "2026-11-07",
+      "sourcePinnedCommit": "66c4298af8d99b9dc397dad6699e508fb871d249",
+      "startKey": "start",
+      "endKey": "peak",
+      "startCue": "Knees bent with feet set on the platform",
+      "endCue": "Press the platform away while keeping knees softly extended",
+      "exactAssets": {
+        "start": {
+          "file": "images/flat/leg-press-start.webp",
+          "gitBlobSha": "69026013bd85545ac3df941d82b4d8dae4be7b95"
+        },
+        "peak": {
+          "file": "images/flat/leg-press-peak.webp",
+          "gitBlobSha": "2ea7c1be8707a2fd1aae591640af9b486cb84ffb"
+        }
+      },
+      "reviewScope": "Two static pose images visually inspected for equipment, exercise identity, and motion phase; not a clinical biomechanics certification."
+    },
+    {
+      "repdbId": "seated-cable-row",
+      "sourceId": "RepDB/exercise-dataset",
+      "title": "Seated cable row",
+      "inspectedDate": "2026-11-07",
+      "sourcePinnedCommit": "66c4298af8d99b9dc397dad6699e508fb871d249",
+      "startKey": "start",
+      "endKey": "peak",
+      "startCue": "Sit upright with arms reaching forward",
+      "endCue": "Pull handle toward torso, drawing elbows back",
+      "exactAssets": {
+        "start": {
+          "file": "images/flat/seated-cable-row-start.webp",
+          "gitBlobSha": "130a77aa3e635cd8b4338dd40237363679a64eb0"
+        },
+        "peak": {
+          "file": "images/flat/seated-cable-row-peak.webp",
+          "gitBlobSha": "5c5c787006400f79de3dbe5efbc860b471c83ecb"
+        }
+      },
+      "reviewScope": "Two static pose images visually inspected for equipment, exercise identity, and motion phase; not a clinical biomechanics certification."
+    },
+    {
+      "repdbId": "lateral-raise",
+      "sourceId": "RepDB/exercise-dataset",
+      "title": "Dumbbell lateral raise",
+      "inspectedDate": "2026-11-07",
+      "sourcePinnedCommit": "66c4298af8d99b9dc397dad6699e508fb871d249",
+      "startKey": "start",
+      "endKey": "peak",
+      "startCue": "Dumbbells down beside thighs",
+      "endCue": "Raise arms sideways near shoulder level",
+      "exactAssets": {
+        "start": {
+          "file": "images/flat/lateral-raise-start.webp",
+          "gitBlobSha": "285e349c96c2fc483b62421bb8a90d8b4d15e594"
+        },
+        "peak": {
+          "file": "images/flat/lateral-raise-peak.webp",
+          "gitBlobSha": "c3f207edd577cbfcd842cbd59b9e52cd5a157f99"
+        }
+      },
+      "reviewScope": "Two static pose images visually inspected for equipment, exercise identity, and motion phase; not a clinical biomechanics certification."
+    }
+  ]
+}
