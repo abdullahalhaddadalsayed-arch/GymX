@@ -1,0 +1,15 @@
+/* Jeff Nippard links: external resources, not affiliated with GymX. */
+.gymx-jeff-video-card{
+  margin:14px 0 18px;padding:17px 15px;border-radius:19px;
+  background:linear-gradient(130deg,#172621,#0f181d);
+  border:1px solid #36533c;
+  display:grid;gap:10px;
+}
+.gymx-jeff-video-heading{display:flex;align-items:center;gap:9px;color:#d5f5c0;font-size:11px;letter-spacing:.085em}
+.gymx-jeff-video-heading strong{font-size:11px;color:#d5f5c0}
+.gymx-jeff-video-icon{display:grid;place-items:center;width:30px;height:30px;background:#c0f879;color:#102014;border-radius:9px;font-size:15px}
+.gymx-jeff-video-card .gymx-jeff-video-note{font-size:12px;line-height:1.5;color:#b0c2b4;margin:0}
+.gymx-jeff-video-card button{width:100%;min-height:46px;font-weight:780;font-size:12px;line-height:1.4;border-radius:11px;padding:10px 13px;cursor:pointer}
+.gymx-jeff-video-primary{background:#c1fb7d;color:#0f1d0f;border:1px solid #c1fb7d}
+.gymx-jeff-video-secondary{background:#1e3027;color:#e2f6d6;border:1px solid #4d6b4c}
+.gymx-jeff-video-card .gymx-jeff-video-footer{margin:1px 0 0;color:#819b8d;font-size:10px;line-height:1.4}
