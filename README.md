@@ -12,3 +12,8 @@ Using **AI and Machine Learning**, GymX allows you to scan gym equipment with yo
 Track weights, reps, cardio, and workout history through interactive charts, weekly progress tracking, and body transformation photos.
 
 **Train Smart. Track Strong.**
+
+
+## Signed in-app Android updates
+
+GymX can check GitHub Releases from **Settings → Check for updates → Update GymX**. The signed APK is built by GitHub Actions using private signing credentials. Android still asks the user to approve installation. For initial migration from a debug APK, export your history and photos first. Keep a secure offline backup of the permanent signing key and password. For details, see [one-time signing setup](updater/SETUP.md).
