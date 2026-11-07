@@ -19,13 +19,13 @@ jobs:
           test -f android-app/app/src/main/java/com/gymx/app/OfflineMachineMatcher.kt
       - name: Download Free Exercise DB
         run: |
-          curl --fail --location --retry 3 --output /tmp/free-exercise-db.zip https://codeload.github.com/yuhonas/free-exercise-db/zip/refs/heads/main
+          curl --fail --location --retry 3 --output /tmp/free-exercise-db.zip https://codeload.github.com/yuhonas/free-exercise-db/zip/f00c92c7dcf1216a928a52c3706c7ce8e2f71ed5
           unzip -q /tmp/free-exercise-db.zip -d /tmp
-          test -f /tmp/free-exercise-db-main/dist/exercises.json
+          test -f /tmp/free-exercise-db-f00c92c7dcf1216a928a52c3706c7ce8e2f71ed5/dist/exercises.json
       - name: Import exercises and keep existing offline machine identification
         run: |
           python3 patch_gymx_freedb_v04.py android-app
-          python3 build_gymx_freedb_v04.py --android-app android-app --free-db /tmp/free-exercise-db-main
+          python3 build_gymx_freedb_v04.py --android-app android-app --free-db /tmp/free-exercise-db-f00c92c7dcf1216a928a52c3706c7ce8e2f71ed5
       - name: Inject new in-app updater
         run: |
           python3 updater/install_updates_v04.py --android-app android-app
@@ -46,6 +46,19 @@ jobs:
           grep -q 'gymx-anatomy.js' android-app/app/src/main/assets/index.html
           grep -q 'gymx-library-images.js' android-app/app/src/main/assets/index.html
           grep -q 'gymx-updates.js' android-app/app/src/main/assets/index.html
+      - name: Verify 36 human-reviewed exercise START and END photo guides
+        run: |
+          python3 updater/enable_reviewed_movements.py --android-app android-app --free-db /tmp/free-exercise-db-f00c92c7dcf1216a928a52c3706c7ce8e2f71ed5
+          node --check android-app/app/src/main/assets/gymx-reviewed-guide-ui.js
+          node --check android-app/app/src/main/assets/gymx-reviewed-guides.js
+          grep -q 'gymx-reviewed-guide-ui.js' android-app/app/src/main/assets/index.html
+          grep -q 'gymx-reviewed-guide-ui.css' android-app/app/src/main/assets/index.html
+      - name: Save reviewed movement QA evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: GymX-verified-movement-QA
+          path: android-app/reviewed-movements-QA.json
+          if-no-files-found: error
       - name: Version every build
         run: |
           echo "GYMX_VERSION_CODE=$((500000 + GITHUB_RUN_NUMBER))" >> "$GITHUB_ENV"
