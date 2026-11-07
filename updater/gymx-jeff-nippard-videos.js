@@ -137,7 +137,12 @@
     const link=document.createElement("a");
     link.className="gx-jeff-link";
     link.href=found.url;
-    link.target="_self"; // Native GymX WebView intercepts YouTube navigation and opens YouTube/phone browser.
+    link.target="_blank"; // Browser fallback; Android uses a native secure external YouTube intent.
+    link.addEventListener("click", event => {
+      if (typeof window.GymXNative?.openJeffVideo !== "function") return;
+      event.preventDefault();
+      window.GymXNative.openJeffVideo(found.url);
+    });
     link.rel="noopener noreferrer";
     link.setAttribute("aria-label","Open Jeff Nippard's YouTube training video for "+ex.name);
     link.textContent=found.quality==="search"?"Search Jeff's channel ↗":"Watch Jeff Nippard ↗";
