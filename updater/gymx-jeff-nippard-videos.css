@@ -1,0 +1,26 @@
+/* GymX external coaching video card. Video stays on YouTube, not bundled. */
+.gx-jeff-video {
+  margin:18px 0 16px;
+  padding:16px;
+  background:linear-gradient(145deg,#162322,#0d171c);
+  border:1px solid #3b5741;
+  border-radius:17px;
+  box-shadow:0 8px 18px #0002;
+}
+.gx-jeff-header{
+ display:flex;align-items:center;justify-content:space-between;gap:10px;
+ margin-bottom:11px;flex-wrap:wrap;
+}
+.gx-jeff-creator {font-size:10px;letter-spacing:.13em;font-weight:850;color:#d1f9ab}
+.gx-jeff-match {font-size:10px;font-weight:750;color:#b7c9b8;background:#243429;border:1px solid #445b44;border-radius:99px;padding:5px 9px}
+.gx-jeff-match.gx-jeff-chapter{background:#273e26;color:#d4ffa8;border-color:#628451}
+.gx-jeff-title{font-size:16px;color:#fff;font-weight:800;line-height:1.35}
+.gx-jeff-subtitle{font-size:12px;line-height:1.4;margin:6px 0 13px;color:#bac9c2}
+.gx-jeff-link{
+ display:flex;align-items:center;justify-content:center;min-height:45px;
+ width:100%;padding:11px 15px;border-radius:12px;
+ background:#b8f765!important;color:#152015!important;
+ text-decoration:none!important;font-weight:800;font-size:13px;
+}
+.gx-jeff-link:focus-visible{outline:2px solid white;outline-offset:3px}
+.gx-jeff-note{font-size:11px;line-height:1.55;color:#a8bcb0;margin:10px 1px 0}
