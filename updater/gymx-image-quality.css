@@ -1,0 +1,98 @@
+/* GymX image QC: no moving media; source-labeled two-position static images. */
+.gx-audit-guide{
+  display:block;
+  width:100%;
+  margin:12px 0 18px;
+  padding:14px;
+  border:1px solid #3d5545;
+  border-radius:19px;
+  background:linear-gradient(145deg,#182821,#101a1f);
+}
+.gx-audit-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:12px;
+}
+.gx-audit-head strong{color:#eef4e9;font-size:11px;font-weight:850;letter-spacing:.09em}
+.gx-audit-pill{color:#bcec87;background:#233929;border:1px solid #486548;font-size:9px;letter-spacing:.07em;font-weight:800;border-radius:999px;padding:5px 8px}
+.gx-audit-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.gx-audit-grid.single{grid-template-columns:1fr}
+.gx-audit-frame{
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:175px;
+  background:#111b21;
+  border-radius:14px;
+  border:1px solid #394a49;
+  overflow:hidden;
+}
+.gx-audit-frame img{
+  display:block;
+  width:100%;
+  height:auto;
+  max-height:300px;
+  aspect-ratio:1/1;
+  object-fit:contain;
+  image-rendering:auto;
+}
+.gx-audit-image-failed{min-height:170px;background:#172522}
+.gx-audit-image-failed::after{content:"Image unavailable";color:#b2c7b6;font-size:12px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
+.gx-audit-label{
+  position:absolute;
+  z-index:2;
+  top:8px;
+  left:8px;
+  display:block;
+  padding:5px 8px;
+  font-size:10px;
+  font-weight:850;
+  border-radius:7px;
+  color:#122011;
+  background:#c1f96c;
+}
+.gx-audit-disclaimer{
+  color:#b2c2b8!important;
+  font-size:11px!important;
+  line-height:1.6!important;
+  margin:12px 2px 3px!important;
+}
+.gx-audit-attribution,.gx-audit-attribution:visited{
+  color:#b9f876!important;
+  display:inline-block;
+  text-decoration:underline!important;
+  text-underline-offset:3px;
+  font-size:11px!important;
+  margin:9px 2px 2px;
+}
+.exercise-row .ex-icon .gx-audit-thumbnail{
+  display:block;
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  border-radius:inherit;
+}
+.exercise-row .ex-icon.gx-audit-no-photo{
+  background:#1a2a25;
+}
+.gx-image-credits{
+  margin:16px 0;
+  padding:15px;
+  background:#17251f;
+  border:1px solid #35533b;
+  border-radius:14px;
+}
+.gx-image-credits strong{color:#c1ef9d;font-size:11px;letter-spacing:.1em}
+.gx-image-credits p{color:#adc2b4;font-size:11px;line-height:1.6;margin:7px 0}
+.gx-image-credits a,.gx-image-credits a:visited{color:#b6f37a!important;font-size:11px}
+@media(max-width:365px){
+  .gx-audit-guide{padding:10px}
+  .gx-audit-grid{gap:6px}
+  .gx-audit-frame{min-height:135px}
+  .gx-audit-frame img{max-height:200px}
+  .gx-audit-label{font-size:9px;padding:4px 5px}
+}
