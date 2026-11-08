@@ -234,7 +234,7 @@
    }
  };
  const selected={main:"All",sub:"All",mode:"all",video:"All"};
- window.GYMX_TAXONOMY={MAIN,SUB,mainGroup,subgroup,refs,VIDEOS};
+ window.GYMX_TAXONOMY={MAIN,SUB,mainGroup,subgroup,refs,VIDEOS,selected};
  let oldFiltered=typeof window.filteredExercises==="function"?window.filteredExercises:null;
  // Wrap the existing library search/equipment filters. Other screens are unchanged.
  if(oldFiltered && !oldFiltered.gxSubgroupWrapped){
