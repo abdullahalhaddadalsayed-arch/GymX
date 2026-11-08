@@ -1,0 +1,30 @@
+name: Review third-party exercise metadata (no images)
+on:
+  push:
+    paths:
+      - 'updater/external_source_audit.py'
+      - '.github/workflows/review-external-metadata.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download pinned MIT-licensed exercise metadata ONLY
+        run: |
+          curl --fail --location --retry 3 --retry-delay 2 -o /tmp/third-party-exercise-metadata.json \
+            https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/7455efae41b330c265e7cd4b78dfa848e7ce5ebd/data/exercises.json
+          test $(stat -c %s /tmp/third-party-exercise-metadata.json) -gt 1000000
+      - name: Match 54 gaps conservatively without importing media
+        run: |
+          python3 updater/external_source_audit.py \
+            --source /tmp/third-party-exercise-metadata.json \
+            --out external-source-review
+      - name: Publish match report as build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: GymX-54-external-metadata-review
+          path: external-source-review/
+          if-no-files-found: error
