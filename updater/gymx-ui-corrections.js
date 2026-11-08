@@ -107,7 +107,7 @@
      const side=selector.querySelector(".body-view [data-view].active")?.dataset.view||"front";
      if(existing) {
        const fixed=svgFor(side,chosen,false);
-       fixed.classList.add("body-map","gx-repaired-body");
+       fixed.classList.add("body-map","gymx-anatomy-map","gx-hires-body","gx-repaired-body");
        existing.replaceWith(fixed);
      }
      const map=selector.querySelector(".gx-repaired-body");
