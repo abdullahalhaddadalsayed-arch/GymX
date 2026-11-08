@@ -1,0 +1,34 @@
+/* GymX static human image + hierarchical muscle filters + verified Jeff sections */
+.gx-curated-panel {border:1px solid #3e5547;background:linear-gradient(145deg,#1b2b23,#101b1d);border-radius:18px;padding:14px;margin:18px 0 15px}
+.gx-curated-tabs {display:flex;gap:8px;margin:0 0 14px}
+.gx-curated-tab {flex:1;min-width:0;padding:11px 8px;background:#26352d;border:1px solid #52634f;border-radius:12px;color:#f1f8e8;font-weight:750}
+.gx-curated-tab.active {background:#c3fb70;color:#172018;border-color:#c3fb70}
+.gx-muscle-filter-line {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.gx-muscle-select {display:flex;flex-direction:column;gap:6px;margin:10px 0;color:#e9f2e3}
+.gx-muscle-select>span {font-size:11px;letter-spacing:.04em;font-weight:750;color:#b4c7b5}
+.gx-muscle-select select {width:100%;min-width:0;padding:10px;border-radius:11px;background:#0c1916;border:1px solid #5d725a;color:#f2ffe6;font-size:13px;max-width:100%}
+.gx-muscle-select select:disabled {opacity:.55}
+.gx-curated-help,.gx-curated-caution {font-size:11px;line-height:1.55;color:#c3d2bb;margin:8px 0}
+.gx-curated-caution{color:#a4bbae;margin-bottom:0}
+.gx-jeff-row-source {color:#caff87;text-decoration:underline;font-size:10px;display:inline-block;margin-top:5px}
+.gx-library-subtitle {display:block;font-size:10px;color:#b7dd9d !important;margin:4px 0}
+/* Original chip panel is replaced by the two-level filter selector, but body silhouette clicks stay enabled. */
+.gx-hierarchical-library .gymx-body-card > .chips {display:none!important}
+.gx-hierarchical-library .gx-guide-intro{display:none}
+/* Static realistic muscle references. Nothing in this module animates. */
+.gx-real-human {width:100%;height:260px;max-width:200px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;border-radius:14px;background:#101b20;margin:0 auto}
+.gx-real-human svg {width:100%;height:100%;display:block;object-fit:contain}
+.gx-real-human svg image {image-rendering:auto}
+.gx-real-human.small {height:100%;width:100%;max-width:none;border-radius:9px}
+.gx-user-reference {background-image:url("gymx-user-male-sprite.webp");background-repeat:no-repeat;background-size:300% 100%;background-position:0% center}
+.gx-user-legs {background-position:50% center}
+.gx-user-shoulders {background-position:100% center}
+.gx-human-caption {position:absolute;left:8px;right:8px;bottom:8px;background:rgba(10,19,17,.82);border:1px solid #5a793a;border-radius:8px;padding:6px;color:#d5ff99;text-align:center;font-size:11px;font-weight:800}
+.exercise-row .ex-icon.gx-real-human-thumb{background:#101c1d;display:block;overflow:hidden}
+.exercise-row .ex-icon.gx-real-human-thumb svg{display:block}
+.gx-human-reference-card {padding:13px;margin:12px 0 16px;border:1px solid #3b5d3e;background:linear-gradient(145deg,#1b2924,#0f1b1a);border-radius:17px}
+.gx-human-card-head{font-size:11px;letter-spacing:.07em;font-weight:800;color:#c4ff83;margin-bottom:10px}
+.gx-human-card-note{font-size:11px;line-height:1.65;color:#c4d0c2;margin:12px 0 1px}
+/* Consistent with explicit 'no GIFs / no animations' requirement for exercise imagery */
+.gx-real-human *,.gx-user-reference,.gx-human-reference-card * {animation:none!important;transition:none!important}
+@media (max-width:365px){.gx-muscle-filter-line{grid-template-columns:1fr}.gx-real-human{height:230px}}
