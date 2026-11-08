@@ -268,10 +268,35 @@
    holder.append(sel);return {holder,sel};
  };
  function apply(){if(typeof ui!=="undefined"){ui.libMuscle="All";window.render?.();}}
+ function decorateRows(main){
+   for(const row of main.querySelectorAll("#exercise-results .exercise-row")) {
+     const id=row.querySelector("[data-id]")?.dataset.id;
+     const ex=EXERCISES.find(x=>String(x.id)===String(id));
+     if(!ex || row.querySelector(".gx-library-subtitle"))continue;
+     const label=el("small","gx-library-subtitle",
+       [mainGroup(ex),subgroup(ex)||"Specific region not confirmed"].join(" · "));
+     row.querySelector(".meta")?.append(label);
+     if(selected.mode==="jeff"){
+       const hits=refs(ex);
+       if(hits.length){
+         const first=VIDEOS.find(v=>v[0]===hits[0]);
+         const link=el("a","gx-jeff-row-source","Jeff · "+(first?first[1]:"Video"));
+         link.href="https://www.youtube.com/watch?v="+hits[0];
+         link.target="_blank";link.rel="noopener noreferrer";
+         link.addEventListener("click",e=>{
+           if(typeof window.GymXNative?.openJeffVideo==="function"){
+             e.preventDefault();window.GymXNative.openJeffVideo(link.href);
+           }
+         });
+         row.querySelector(".meta")?.append(link);
+       }
+     }
+   }
+ }
  function library(){
    const main=document.querySelector("main.body");
    if(!main || !main.querySelector("h1")?.textContent.includes("Explore exercises")) return;
-   if(main.querySelector("#gx-curated-filters"))return;
+   if(main.querySelector("#gx-curated-filters")){decorateRows(main);return;}
    const panel=el("section","gx-curated-panel");
    panel.id="gx-curated-filters";
    const tabs=el("div","gx-curated-tabs");
@@ -314,34 +339,15 @@
    // Existing group chips remain for the diagram but are visually hidden
    // to avoid showing two conflicting filter systems.
    main.classList.add("gx-hierarchical-library");
-   for(const row of main.querySelectorAll("#exercise-results .exercise-row")) {
-     const id=row.querySelector("[data-id]")?.dataset.id;
-     const ex=EXERCISES.find(x=>String(x.id)===String(id));
-     if(!ex)continue;
-     const label=el("small","gx-library-subtitle",
-       [mainGroup(ex),subgroup(ex)||"Specific region not confirmed"].join(" · "));
-     row.querySelector(".meta")?.append(label);
-     if(selected.mode==="jeff"){
-       const hits=refs(ex);
-       if(hits.length){
-         const first=VIDEOS.find(v=>v[0]===hits[0]);
-         const link=el("a","gx-jeff-row-source","Jeff · "+(first?first[1]:"Video"));
-         link.href="https://www.youtube.com/watch?v="+hits[0];
-         link.target="_blank";link.rel="noopener noreferrer";
-         link.addEventListener("click",e=>{
-           if(typeof window.GymXNative?.openJeffVideo==="function"){
-             e.preventDefault();window.GymXNative.openJeffVideo(link.href);
-           }
-         });
-         row.querySelector(".meta")?.append(link);
-       }
-     }
-   }
+   decorateRows(main);
    const heading=[...main.querySelectorAll("h2,h3")].find(x=>/^\d+\s+exercises/.test((x.textContent||"").trim()));
    if(heading && typeof window.filteredExercises==="function")
       heading.textContent=window.filteredExercises().length+" exercises";
  }
  document.addEventListener("click",e=>{
+   if(e.target.closest?.('[data-act="clear-library"]')){
+     selected.main="All";selected.sub="All";selected.mode="all";selected.video="All";
+   }
    const b=e.target.closest?.('[data-act="filter-muscle"]');
    if(!b || typeof ui==="undefined" || ui.page!=="library")return;
    e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
