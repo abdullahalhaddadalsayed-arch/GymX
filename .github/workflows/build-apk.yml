@@ -115,6 +115,16 @@ jobs:
           grep -q 'gymx-home-features.js' android-app/app/src/main/assets/index.html
           grep -q 'gymx-home-features.css' android-app/app/src/main/assets/index.html
           grep -q 'gymx-messages.js' android-app/app/src/main/assets/index.html
+      - name: Install static human muscle map and Jeff-curated library
+        run: |
+          python3 updater/install_static_muscle_jeff.py --android-app android-app
+          node --check android-app/app/src/main/assets/gymx-muscle-jeff-library.js
+          node --check android-app/app/src/main/assets/gymx-static-human-fallback.js
+          test -s android-app/app/src/main/assets/gymx-user-male-sprite.webp
+          grep -q 'gymx-muscle-jeff-library.js' android-app/app/src/main/assets/index.html
+          grep -q 'gymx-static-human-fallback.js' android-app/app/src/main/assets/index.html
+          grep -q 'gymx-static-muscle-jeff.css' android-app/app/src/main/assets/index.html
+          ! find android-app/app/src/main/assets -type f \( -iname '*.gif' -o -iname '*.apng' -o -iname '*.webm' \) | grep .
       - name: Save full image coverage QA evidence
         uses: actions/upload-artifact@v4
         with:
