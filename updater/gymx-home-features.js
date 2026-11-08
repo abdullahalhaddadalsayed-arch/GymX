@@ -16,6 +16,8 @@
   let dbPromise = null;
   let availableVersion = '';
   let popupShowing = false;
+  let checkedThisSession = false;
+  const wasAvailableLastSession = Boolean(read(keys.available,''));
 
   function read(key, fallback) {
     try { const val=localStorage.getItem(key); return val===null ? fallback : val; }
@@ -191,7 +193,9 @@
     popupShowing=true;
     install.focus();
   }
-  availableVersion=read(keys.available,'');
+  // Always recheck a previously available release: native updateNow() only works
+  // after the current process has fetched its trusted Release object.
+  availableVersion='';
   const previousEvent=window.gymxUpdateEvent;
   window.gymxUpdateEvent=function(event) {
     if (typeof previousEvent==='function') previousEvent(event);
@@ -211,9 +215,10 @@
     }
   };
   function maybeAutoCheck() {
-    if(!hasNative() || !home()) return;
+    if(!hasNative() || !home() || checkedThisSession) return;
     const now=Date.now(), last=Number(read(keys.checked,'0'));
-    if(Number.isFinite(last) && now-last>=0 && now-last<12*60*60*1000) return;
+    if(!wasAvailableLastSession && Number.isFinite(last) && now-last>=0 && now-last<12*60*60*1000) return;
+    checkedThisSession=true;
     write(keys.checked,String(now));
     try { window.GymXNative.checkForUpdates(); } catch (_) {}
   }
