@@ -31,20 +31,6 @@ def good(source):
     return None
 
 binary=good(text)
-if binary is None and len(text)%4==3:
-    # Diagnostic recovery for a single missing base64 character during transfer.
-    # Do not accept another image; original SHA-256 must match.
-    alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
-    for pos in range(len(text)+1):
-        stem=text[:pos]
-        tail=text[pos:]
-        for letter in alphabet:
-            candidate=stem+letter+tail
-            binary=good(candidate)
-            if binary is not None:
-                print("RECOVERED_IMAGE_BASE64_INSERTION="+str(pos)+":"+letter)
-                break
-        if binary is not None:break
 assert binary is not None, "Approved user human image SHA mismatch / corrupted base64"
 assert binary[:4]==b"RIFF" and binary[8:12]==b"WEBP"
 (assets/name).write_bytes(binary)
