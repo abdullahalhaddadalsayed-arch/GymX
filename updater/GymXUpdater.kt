@@ -10,6 +10,8 @@ import android.provider.Settings
 import androidx.core.content.FileProvider
 import org.json.JSONObject
 import java.io.File
+import java.io.IOException
+import javax.net.ssl.SSLException
 import java.net.HttpURLConnection
 import java.net.URL
 import java.security.MessageDigest
@@ -86,6 +88,59 @@ class GymXUpdater(private val activity: Activity, private val emit: (JSONObject)
         }.start()
     }
 
+    /** Temporary GitHub/CDN 504 errors should not end an update immediately. */
+    private fun openDownloadWithRetries(url: String): HttpURLConnection {
+        var lastFailure: IOException = IOException("Download was unavailable")
+        for (attempt in 1..4) {
+            var connection: HttpURLConnection? = null
+            var success = false
+            try {
+                connection=(URL(url).openConnection() as HttpURLConnection).apply {
+                    connectTimeout=20000
+                    readTimeout=90000
+                    instanceFollowRedirects=true
+                    setRequestProperty("User-Agent","GymX-Android-Updater")
+                }
+                val code=connection.responseCode
+                if(code==200) {
+                    success=true
+                    return connection
+                }
+                val error=IOException("Download failed: HTTP " + code)
+                if(code !in listOf(408,429,500,502,503,504)) throw error
+                lastFailure=error
+            } catch(e: IOException) {
+                if(e is SSLException) throw e
+                lastFailure=e
+                if(e.message?.startsWith("Download failed: HTTP ") == true &&
+                    e.message !in listOf("Download failed: HTTP 408","Download failed: HTTP 429",
+                        "Download failed: HTTP 500","Download failed: HTTP 502",
+                        "Download failed: HTTP 503","Download failed: HTTP 504"))
+                    throw e
+            } finally {
+                if(!success) connection?.disconnect()
+            }
+            if(attempt < 4) {
+                status("retrying","GitHub download temporarily unavailable. Retrying (" +
+                    (attempt+1) + "/4)…")
+                Thread.sleep(1500L * (1L shl (attempt-1)))
+            }
+        }
+        throw IOException(lastFailure.message ?: "Download failed after retries")
+    }
+
+    /** Browser fallback if the in-app connection to GitHub/CDN keeps timing out. */
+    fun openLatestReleasePage() = main.post {
+        try {
+            activity.startActivity(Intent(Intent.ACTION_VIEW,
+                Uri.parse("https://github.com/" + repo + "/releases/latest")).apply {
+                addCategory(Intent.CATEGORY_BROWSABLE)
+            })
+        } catch(e:Exception) {
+            status("error","Could not open GitHub Releases: " + (e.message ?: "Unknown error"))
+        }
+    }
+
     fun updateNow() {
         if(busy) return
         val release=next ?: run { status("error","Check for updates first."); return }
@@ -94,11 +149,7 @@ class GymXUpdater(private val activity: Activity, private val emit: (JSONObject)
         status("downloading","Downloading GymX v${release.version}...")
         Thread {
             try {
-                val conn=(URL(release.url).openConnection() as HttpURLConnection).apply {
-                    connectTimeout=20000; readTimeout=60000; instanceFollowRedirects=true
-                    setRequestProperty("User-Agent","GymX-Android-Updater")
-                }
-                require(conn.responseCode==200) { "Download failed: HTTP ${conn.responseCode}" }
+                val conn=openDownloadWithRetries(release.url)
                 val size=conn.contentLengthLong
                 require(size<=200000000L || size == -1L) { "APK too large" }
                 val folder=File(activity.cacheDir,"updates").apply { mkdirs() }
@@ -136,7 +187,7 @@ class GymXUpdater(private val activity: Activity, private val emit: (JSONObject)
                 status("downloaded","Download complete. Confirm Android installation.",release.version)
                 install(file)
             } catch(e:Exception) {
-                status("error",e.message ?: "Update failed")
+                status("error","In-app download failed: " + (e.message ?: "Network error") + ". Retry or choose Open GitHub Releases in Settings.")
             } finally { busy=false }
         }.start()
     }

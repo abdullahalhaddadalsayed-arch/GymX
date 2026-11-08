@@ -32,18 +32,20 @@
       '<button type="button" class="btn outline full" id="gymx-update-check">Check for updates</button>' +
       '<p class="small-note" role="status" aria-live="polite" id="gymx-update-status"></p>' +
       '<button type="button" class="btn primary full" id="gymx-update-install" hidden>Update GymX</button>' +
+      '<button type="button" class="btn outline full" id="gymx-update-browser">Open GitHub Releases in browser</button>' +
       '<p class="small-note">Requires an official signed GymX GitHub Release. Android will request installation approval. Back up before the first signing-key migration.</p>';
     panel.querySelector('#gymx-current-version').textContent =
       hasNative ? String(window.GymXNative.getAppVersion?.() || 'installed') : 'browser preview';
     panel.querySelector('#gymx-update-status').textContent = hasNative ? statusText : 'In-app APK updates require the Android installation.';
     panel.querySelector('#gymx-update-check').disabled = !hasNative;
+    panel.querySelector('#gymx-update-browser').disabled = !hasNative || typeof window.GymXNative?.openUpdateReleasePage !== 'function';
     const install=panel.querySelector('#gymx-update-install');
     install.hidden=!nextVersion;
     if(nextVersion) install.textContent='Update GymX to v'+nextVersion;
     modal.appendChild(panel);
   }
   document.addEventListener('click',e=>{
-    const button=e.target.closest?.('#gymx-update-check,#gymx-update-install');
+    const button=e.target.closest?.('#gymx-update-check,#gymx-update-install,#gymx-update-browser');
     if(!button) return;
     e.preventDefault(); e.stopImmediatePropagation();
     if(!hasNative) return;
@@ -51,6 +53,8 @@
       available('');
       message('Checking GitHub for a new version…');
       window.GymXNative.checkForUpdates();
+    } else if (button.id==='gymx-update-browser') {
+      window.GymXNative.openUpdateReleasePage();
     } else {
       message('Preparing your Android update…');
       window.GymXNative.installUpdate();

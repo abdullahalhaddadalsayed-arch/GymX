@@ -34,6 +34,7 @@ if 'private lateinit var updater: GymXUpdater' not in s:
             @JavascriptInterface fun getAppVersion(): String = updater.installedVersion()
             @JavascriptInterface fun checkForUpdates() { updater.checkForUpdates() }
             @JavascriptInterface fun installUpdate() { updater.updateNow() }
+            @JavascriptInterface fun openUpdateReleasePage() { updater.openLatestReleasePage() }
 ''', 1)
 java.write_text(s)
 
