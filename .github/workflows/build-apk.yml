@@ -125,6 +125,14 @@ jobs:
           grep -q 'gymx-static-human-fallback.js' android-app/app/src/main/assets/index.html
           grep -q 'gymx-static-muscle-jeff.css' android-app/app/src/main/assets/index.html
           ! find android-app/app/src/main/assets -type f \( -iname '*.gif' -o -iname '*.apng' -o -iname '*.webm' \) | grep .
+      - name: Apply user-facing human model and library layout corrections
+        run: |
+          python3 updater/install_ui_corrections.py --android-app android-app
+          node --check android-app/app/src/main/assets/gymx-ui-corrections.js
+          test -s android-app/app/src/main/assets/gymx-user-front-base.webp
+          grep -q 'gymx-ui-corrections.js' android-app/app/src/main/assets/index.html
+          grep -q 'gymx-ui-corrections.css' android-app/app/src/main/assets/index.html
+          ! find android-app/app/src/main/assets -type f \( -iname '*.gif' -o -iname '*.apng' -o -iname '*.webm' \) | grep .
       - name: Save full image coverage QA evidence
         uses: actions/upload-artifact@v4
         with:
