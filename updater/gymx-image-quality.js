@@ -46,6 +46,8 @@
       return {kind:"publisher",list:[item.images.start,item.images.peak],repdb:item};
     if(item?.images?.main)
       return {kind:"publisher-single",list:[item.images.main],repdb:item};
+    if(item?.kind==="exercise_schematic_reference" && item?.thumbnail)
+      return {kind:"schematic",list:[item.thumbnail]};
     if(item?.thumbnail && /_reference$/.test(item.kind||""))
       return {kind:"category",list:[item.thumbnail],category:item.kind};
     if(validLegacy(ex).length)
@@ -73,7 +75,7 @@
       if(was===first)continue;
       row.dataset.gxStaticThumbnail=first;
       icon.classList.remove("gx-audit-no-photo");
-      icon.classList.toggle("gx-audit-category-icon",state.kind==="category");
+      icon.classList.toggle("gx-audit-category-icon",state.kind==="category" || state.kind==="schematic");
       let existing=icon.querySelector("img.gx-audit-thumbnail");
       if(existing)existing.remove();
       if(state.kind==="reviewed")continue; // preserve photo quality as installed.
@@ -93,10 +95,12 @@
     const kicker=e("strong","",state.kind==="static-reviewed"?"REVIEWED START / END MOVEMENT":
       state.kind==="legacy"?"EXERCISE REFERENCE PHOTOS":
       state.kind==="missing"?"MOVEMENT GUIDE":
+      state.kind==="schematic"?"ORIGINAL EXERCISE-THEMED ILLUSTRATION":
       state.kind==="category"?"TARGET MUSCLE / EQUIPMENT REFERENCE":"STATIC MOVEMENT POSITIONS");
     const pill=e("span","gx-audit-pill",state.kind==="static-reviewed"?"TWO POSES · VISUALLY REVIEWED":
       state.kind==="publisher"?"REPDB · TWO POSITIONS":
       state.kind==="publisher-single"?"REPDB · ONE POSITION":
+      state.kind==="schematic"?"SYMBOLIC CARD · NOT MOVEMENT ART":
       state.kind==="category"?"EQUIPMENT / MUSCLE ART":
       state.kind==="legacy"?"REFERENCE ONLY":"PHOTOS UNAVAILABLE");
     header.append(kicker,pill);
@@ -108,6 +112,7 @@
         const frame=e("div","gx-audit-frame");
         const badge=e("span","gx-audit-label",
           state.kind==="static-reviewed"?(i===0?"START":"END"):
+          state.kind==="schematic"?"SCHEMATIC":
           state.kind==="category"?(state.category==="equipment_reference"?"EQUIPMENT":"MUSCLE"):
           state.kind.startsWith("publisher")?
           (state.list.length>1?i===0?"POSITION 1":"POSITION 2":"STATIC POSITION"):
@@ -127,6 +132,8 @@
       note="A static RepDB exercise illustration is available. This is not a complete START/END demonstration; follow the written instructions.";
     else if(state.kind==="legacy")
       note="These are existing reference photos; their movement order has not been independently checked. Do not treat them as a verified START/END sequence.";
+    else if(state.kind==="schematic")
+      note="Original GymX illustration showing the exercise theme, not a verified execution pose or START/END guide. Movement-specific photos are still needed. Follow the written instructions.";
     else if(state.kind==="category")
       note="This licensed visual shows the equipment or muscle group only. It is not an exercise demonstration. No verified movement photos are available yet; follow the written instructions.";
     else

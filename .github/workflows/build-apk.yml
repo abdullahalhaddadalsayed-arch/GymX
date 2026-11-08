@@ -2,6 +2,8 @@ name: Build GymX and publish signed updates
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 permissions:
   contents: write
@@ -99,6 +101,20 @@ jobs:
           test -s android-app/gymx-image-audit.json
           test -s android-app/gymx-image-summary.md
           grep -q 'gymx-image-quality.js' android-app/app/src/main/assets/index.html
+      - name: Improve remaining 54 thumbnails with original schematic references
+        run: |
+          python3 updater/install_schematic_thumbnails.py --android-app android-app
+          test "$(find android-app/app/src/main/assets/gymx-schematics -name '*.svg' | wc -l)" -eq 54
+          test -s android-app/gymx-image-audit.json
+          grep -q 'original_schematic_reference_thumbnails' android-app/gymx-image-audit.json
+      - name: Install daily motivation and home update notices
+        run: |
+          python3 updater/install_home_features.py --android-app android-app
+          node --check android-app/app/src/main/assets/gymx-home-features.js
+          node --check android-app/app/src/main/assets/gymx-messages.js
+          grep -q 'gymx-home-features.js' android-app/app/src/main/assets/index.html
+          grep -q 'gymx-home-features.css' android-app/app/src/main/assets/index.html
+          grep -q 'gymx-messages.js' android-app/app/src/main/assets/index.html
       - name: Save full image coverage QA evidence
         uses: actions/upload-artifact@v4
         with:
@@ -149,6 +165,7 @@ jobs:
           path: android-app/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
       - name: Check private signing secrets
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         id: signing
         env:
           KEYSTORE_BASE64: ${{ secrets.GYMX_RELEASE_KEYSTORE_B64 }}
