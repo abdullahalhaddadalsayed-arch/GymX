@@ -1,0 +1,62 @@
+/* GymX v0.5.84 UI repair. Static photos and tappable green muscle overlays. */
+.gx-ui-cleaned .gx-library-intro,
+.gx-ui-cleaned .gymx-guide-intro,
+.gx-ui-cleaned .gx-library-hint,
+.gx-ui-cleaned .gx-figure-foot,
+.gx-ui-cleaned .gx-curated-caution {display:none!important}
+.gx-ui-cleaned .gx-curated-panel {padding:7px 0 2px;margin:10px 0 13px;
+  border:0;box-shadow:none;background:transparent;border-radius:0}
+.gx-ui-cleaned .gx-curated-tabs {margin-bottom:8px}
+.gx-ui-cleaned .gymx-body-card {margin:10px 0 12px!important;padding:14px 12px 12px!important}
+.gx-repaired-body {display:block!important;width:min(100%,275px)!important;
+  max-height:460px!important;height:auto!important;aspect-ratio:225/402!important;
+  margin:10px auto!important;border:1px solid #425b42;border-radius:15px;
+  overflow:hidden;background:#0c171b;box-shadow:0 16px 32px #0004}
+.gx-repaired-body .gx-fixed-zone {cursor:pointer;outline:none}
+.gx-fixed-zone path {fill:#baff6b;fill-opacity:.16;stroke:#b3fa77;
+  stroke-opacity:.55;stroke-width:1.6;vector-effect:non-scaling-stroke}
+.gx-fixed-zone.active path {fill-opacity:.48;stroke-opacity:1;stroke-width:2.7;
+  filter:drop-shadow(0 0 4px rgba(157,255,68,.8))}
+.gx-fixed-zone:focus-visible path,.gx-fixed-zone:hover path {
+  fill-opacity:.46;stroke-opacity:1;stroke-width:2.5}
+.gx-fixed-figure {display:block;width:100%!important;height:100%!important;
+  background:#0d171b;overflow:hidden}
+.gx-fixed-human {position:relative;width:min(100%,255px);height:355px;
+  margin:0 auto;display:flex;align-items:stretch;justify-content:center;
+  overflow:hidden;background:#0d171b;border-radius:14px}
+.gx-fixed-human .gx-fixed-zone {pointer-events:none}
+.gx-fixed-human:not(.is-thumb) .gx-fixed-zone:not(.active) path {
+  fill-opacity:0;stroke-opacity:0}
+.gx-fixed-human:not(.is-thumb) .gx-fixed-zone.active path {
+  fill-opacity:.42;stroke-opacity:.85}
+.gx-fixed-caption {position:absolute;bottom:6px;left:8px;right:8px;
+  padding:6px 9px;border-radius:8px;background:#0b1819e6;
+  border:1px solid #729d44;color:#d2ff9d;font-size:11px;font-weight:800;
+  text-align:center}
+.gx-human-reference-card .gx-fixed-human {max-width:245px;height:360px}
+.gymx-mini-map .gx-fixed-human {height:174px;width:122px;max-width:122px;border-radius:11px}
+.gymx-mini-map .gx-fixed-human .gx-fixed-figure {width:100%;height:100%}
+#exercise-results .exercise-row .ex-icon.gx-fixed-icon,
+.gymx-v05-library .exercise-row .ex-icon.gx-fixed-icon {
+  width:82px!important;min-width:82px!important;height:82px!important;
+  padding:0!important;display:block!important;
+  border:1px solid #415747;border-radius:12px;
+  background:#0c171b;overflow:hidden!important}
+#exercise-results .exercise-row .ex-icon.gx-fixed-icon .gx-fixed-human {
+  width:100%!important;height:100%!important;max-width:none!important;
+  margin:0;border:0;border-radius:0}
+#exercise-results .exercise-row .ex-icon.gx-fixed-icon .gx-fixed-figure {
+  width:100%!important;height:100%!important;max-width:none!important;
+  object-fit:cover!important}
+#exercise-results .exercise-row .ex-icon.gx-fixed-icon > img,
+#exercise-results .exercise-row .ex-icon.gx-fixed-icon > svg {display:none!important}
+#exercise-results .exercise-row .ex-icon.gx-fixed-icon .gx-fixed-zone path {
+  stroke-width:2.5;fill-opacity:0}
+#exercise-results .exercise-row .ex-icon.gx-fixed-icon .gx-fixed-zone.active path {
+  fill-opacity:.5;stroke-width:2.5}
+#exercise-results .exercise-row .ex-icon.gx-fixed-icon:after {content:none!important}
+.gx-fixed-human *, .gx-repaired-body * {animation:none!important;transition:none!important}
+@media(max-width:370px) {
+ .gx-repaired-body{width:min(100%,245px)!important}
+ #exercise-results .exercise-row .ex-icon.gx-fixed-icon{width:72px!important;min-width:72px!important;height:72px!important}
+}
